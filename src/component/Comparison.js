@@ -478,7 +478,7 @@ const ResultsScreen = ({ onRestart }) => {
       <div className="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
         <Check className="text-green-600" size={48} />
       </div>
-      <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 className=" text-xl text-3xl font-bold text-gray-900 dark:text-white mb-4">
         Demande enregistrée avec succès !
       </h2>
       <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
@@ -584,11 +584,12 @@ const Comparison = () => {
         setShowConfirmation(false);
         setIsCompleted(true);
       } else {
-        alert(data.message || "Une erreur est survenue");
+
+        toast.error(data.message || "Une erreur est survenue")
       }
     } catch (error) {
       console.error(error);
-      alert("Erreur réseau ou serveur");
+      toast.error("Erreur réseau ou serveur");
     } finally {
       setLoading(false);
     }
