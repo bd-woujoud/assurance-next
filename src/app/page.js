@@ -330,11 +330,11 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
               {/* Col gauche - Texte */}
               <div className="space-y-6 mt-5 mt-md-0">
                 <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
-                  Trouvez l&#39;assurance{" "}
+                  Trouvez l&apos;assurance{" "}
                   <span className="text-pink-300">parfaite</span> en Suisse
                 </h1>
                 <p className="text-md md:text-xl text-gray-100">
-                  Comparez les meilleures offres d&#39;assurance maladie suisse en 2 minutes.
+                  Comparez les meilleures offres d&apos;assurance maladie suisse en 2 minutes.
                   <span className="font-bold">Économisez jusquà 40% sur vos primes !</span>
                 </p>
 
@@ -350,7 +350,7 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-yellow-300 text-lg">👨‍👩‍👧‍👦</span>
-                    +50&#39;000 familles
+                    +50&apos;000 familles
                   </div>
                 </div>
 
@@ -474,8 +474,8 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
               </div>
               <div className="text-center my-6">
 
-                <div className="text-green-600 font-medium">Jusqu&#39;à 40%
-                  d&#39;économies par an</div>
+                <div className="text-green-600 font-medium">Jusqu&apos;à 40%
+                  d&apos;économies par an</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-sm">
@@ -509,8 +509,8 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
               </div>
               <div className="text-center my-6">
 
-                <div className="text-green-600 font-medium">Jusqu&#39;à 30%
-                  d&#39;économies par an</div>
+                <div className="text-green-600 font-medium">Jusqu&apos;à 30%
+                  d&apos;économies par an</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-sm">
@@ -544,8 +544,8 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
               </div>
               <div className="text-center my-6">
 
-                <div className="text-green-600 font-medium">Jusqu&#39;à 28%
-                  d&#39;économies par an</div>
+                <div className="text-green-600 font-medium">Jusqu&apos;à 28%
+                  d&apos;économies par an</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-sm">
