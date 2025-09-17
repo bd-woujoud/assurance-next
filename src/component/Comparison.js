@@ -1,5 +1,36 @@
 "use client"
 import React, { useState } from 'react';
+import {
+  GraduationCap,
+  Briefcase,
+  TrendingUp,
+  Award,
+  Crown,
+  Globe,
+  Building,
+  Mountain,
+  MapPin,
+  User,
+  Heart,
+  Home,
+  UserCheck,
+  CheckCircle,
+  PlusCircle,
+  Star,
+  HelpCircle,
+  Battery,
+  UserPlus,
+  HelpCircle as Question,
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  Lock,
+  Zap,
+  Gift,
+  Phone,
+  MapPinIcon,
+  IdCard
+} from 'lucide-react';
 
 // Données du quiz avec formulaire complet
 const quizData = [
@@ -7,11 +38,11 @@ const quizData = [
     question: "Quel âge avez-vous ?",
     iconColor: "text-blue-600",
     options: [
-      { text: "18-25 ans", icon: "fas fa-graduation-cap" },
-      { text: "26-35 ans", icon: "fas fa-briefcase" },
-      { text: "36-45 ans", icon: "fas fa-chart-line" },
-      { text: "46-55 ans", icon: "fas fa-award" },
-      { text: "56-65 ans", icon: "fas fa-crown" },
+      { text: "18-25 ans", icon: GraduationCap },
+      { text: "26-35 ans", icon: Briefcase },
+      { text: "36-45 ans", icon: TrendingUp },
+      { text: "46-55 ans", icon: Award },
+      { text: "56-65 ans", icon: Crown },
     ],
     type: "info"
   },
@@ -19,10 +50,10 @@ const quizData = [
     question: "Dans quel canton habitez-vous ?",
     iconColor: "text-green-600",
     options: [
-      { text: "Genève", icon: "fas fa-globe" },
-      { text: "Zurich", icon: "fas fa-city" },
-      { text: "Valais", icon: "fas fa-mountain" },
-      { text: "Autre canton", icon: "fas fa-map-pin" }
+      { text: "Genève", icon: Globe },
+      { text: "Zurich", icon: Building },
+      { text: "Valais", icon: Mountain },
+      { text: "Autre canton", icon: MapPin }
     ],
     type: "info"
   },
@@ -30,10 +61,10 @@ const quizData = [
     question: "Quelle est votre situation familiale ?",
     iconColor: "text-purple-600",
     options: [
-      { text: "Célibataire", icon: "fas fa-user" },
-      { text: "En couple", icon: "fas fa-heart" },
-      { text: "Famille avec enfants", icon: "fas fa-home" },
-      { text: "Senior", icon: "fas fa-user-check" }
+      { text: "Célibataire", icon: User },
+      { text: "En couple", icon: Heart },
+      { text: "Famille avec enfants", icon: Home },
+      { text: "Senior", icon: UserCheck }
     ],
     type: "info"
   },
@@ -41,10 +72,10 @@ const quizData = [
     question: "Quel type de couverture recherchez-vous ?",
     iconColor: "text-teal-600",
     options: [
-      { text: "Assurance de base uniquement", icon: "fas fa-check-circle" },
-      { text: "Base + Complémentaire", icon: "fas fa-plus-circle" },
-      { text: "Couverture complète", icon: "fas fa-star" },
-      { text: "Je ne sais pas", icon: "fas fa-question-circle" }
+      { text: "Assurance de base uniquement", icon: CheckCircle },
+      { text: "Base + Complémentaire", icon: PlusCircle },
+      { text: "Couverture complète", icon: Star },
+      { text: "Je ne sais pas", icon: HelpCircle }
     ],
     type: "info"
   },
@@ -52,10 +83,10 @@ const quizData = [
     question: "À quelle fréquence consultez-vous un médecin ?",
     iconColor: "text-blue-600",
     options: [
-      { text: "Rarement (1-2 fois/an)", icon: "fas fa-battery-quarter" },
-      { text: "Occasionnellement (3-5 fois/an)", icon: "fas fa-battery-half" },
-      { text: "Régulièrement (6-10 fois/an)", icon: "fas fa-battery-three-quarters" },
-      { text: "Fréquemment (plus de 10 fois/an)", icon: "fas fa-battery-full" }
+      { text: "Rarement (1-2 fois/an)", icon: Battery },
+      { text: "Occasionnellement (3-5 fois/an)", icon: Battery },
+      { text: "Régulièrement (6-10 fois/an)", icon: Battery },
+      { text: "Fréquemment (plus de 10 fois/an)", icon: Battery }
     ],
     type: "info"
   },
@@ -64,7 +95,7 @@ const quizData = [
     question: "Pour finaliser votre demande, merci de remplir vos coordonnées",
     iconColor: "text-green-600",
     type: "form",
-    icon: "fas fa-user-plus"
+    icon: UserPlus
   }
 ];
 
@@ -77,7 +108,7 @@ const ProgressBar = ({ current, total }) => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-            <i className="fas fa-question text-white text-sm"></i>
+            <Question className="text-white" size={16} />
           </div>
           <div>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Question</div>
@@ -99,6 +130,8 @@ const ProgressBar = ({ current, total }) => {
 
 // Composant Option Answer
 const AnswerOption = ({ option, index, isSelected, onSelect }) => {
+  const IconComponent = option.icon;
+
   return (
     <div
       onClick={() => onSelect(index)}
@@ -113,7 +146,7 @@ const AnswerOption = ({ option, index, isSelected, onSelect }) => {
             ? 'bg-white text-blue-600'
             : 'bg-gray-100 dark:bg-gray-600 group-hover:bg-blue-600 group-hover:text-white'
             }`}>
-            <i className={`${option.icon} text-lg`}></i>
+            <IconComponent size={20} />
           </div>
         </div>
         <div className="flex-1">
@@ -135,9 +168,10 @@ const AnswerOption = ({ option, index, isSelected, onSelect }) => {
 };
 
 // Composant Form Question (formulaire complet)
-const FormQuestion = ({ question, contactData, onChange, onNext, onPrevious, currentIndex, totalQuestions }) => {
+const FormQuestion = ({ question, contactData, onChange, onSubmit, onPrevious, currentIndex, totalQuestions, loading }) => {
   const isLastQuestion = currentIndex === totalQuestions - 1;
   const isFormValid = contactData.firstName && contactData.lastName && contactData.phone && contactData.adresse;
+  const IconComponent = question.icon;
 
   const handleChange = (field, value) => {
     onChange(field, value);
@@ -153,7 +187,7 @@ const FormQuestion = ({ question, contactData, onChange, onNext, onPrevious, cur
       <div className="mb-8">
         <div className="flex items-center justify-center mb-6">
           <div className="w-16 h-16 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-full flex items-center justify-center shadow-lg mb-4">
-            <i className={`${question.icon} text-2xl ${question.iconColor}`}></i>
+            <IconComponent className={`${question.iconColor}`} size={32} />
           </div>
         </div>
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 leading-relaxed text-center">
@@ -164,7 +198,7 @@ const FormQuestion = ({ question, contactData, onChange, onNext, onPrevious, cur
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="form-group">
               <label className="block text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                <i className="fas fa-user mr-2 text-blue-500"></i>
+                <User className="inline mr-2 text-blue-500" size={20} />
                 Prénom *
               </label>
               <input
@@ -174,12 +208,13 @@ const FormQuestion = ({ question, contactData, onChange, onNext, onPrevious, cur
                 placeholder="Votre prénom"
                 className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                 required
+                disabled={loading}
               />
             </div>
 
             <div className="form-group">
               <label className="block text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                <i className="fas fa-id-card mr-2 text-purple-500"></i>
+                <IdCard className="inline mr-2 text-purple-500" size={20} />
                 Nom *
               </label>
               <input
@@ -189,12 +224,13 @@ const FormQuestion = ({ question, contactData, onChange, onNext, onPrevious, cur
                 placeholder="Votre nom de famille"
                 className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                 required
+                disabled={loading}
               />
             </div>
 
             <div className="form-group">
               <label className="block text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                <i className="fas fa-phone mr-2 text-green-500"></i>
+                <Phone className="inline mr-2 text-green-500" size={20} />
                 Téléphone *
               </label>
               <input
@@ -204,12 +240,13 @@ const FormQuestion = ({ question, contactData, onChange, onNext, onPrevious, cur
                 placeholder="76 123 45 67"
                 className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                 required
+                disabled={loading}
               />
             </div>
 
             <div className="form-group">
               <label className="block text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                <i className="fas fa-map-marker-alt mr-2 text-red-500"></i>
+                <MapPinIcon className="inline mr-2 text-red-500" size={20} />
                 Adresse *
               </label>
               <input
@@ -219,6 +256,7 @@ const FormQuestion = ({ question, contactData, onChange, onNext, onPrevious, cur
                 placeholder="Votre adresse complète"
                 className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                 required
+                disabled={loading}
               />
             </div>
           </div>
@@ -226,15 +264,15 @@ const FormQuestion = ({ question, contactData, onChange, onNext, onPrevious, cur
           {/* Éléments de confiance */}
           <div className="grid grid-cols-3 gap-4 mt-8 mb-6">
             <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
-              <i className="fas fa-lock text-2xl text-blue-500 mb-2"></i>
+              <Lock className="mx-auto text-blue-500 mb-2" size={32} />
               <div className="text-sm font-medium text-gray-700 dark:text-gray-300">100% sécurisé</div>
             </div>
             <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
-              <i className="fas fa-bolt text-2xl text-yellow-500 mb-2"></i>
+              <Zap className="mx-auto text-yellow-500 mb-2" size={32} />
               <div className="text-sm font-medium text-gray-700 dark:text-gray-300">Envoi instantané</div>
             </div>
             <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
-              <i className="fas fa-gift text-2xl text-green-500 mb-2"></i>
+              <Gift className="mx-auto text-green-500 mb-2" size={32} />
               <div className="text-sm font-medium text-gray-700 dark:text-gray-300">Totalement gratuit</div>
             </div>
           </div>
@@ -245,26 +283,33 @@ const FormQuestion = ({ question, contactData, onChange, onNext, onPrevious, cur
         {currentIndex > 0 ? (
           <button
             onClick={onPrevious}
-            className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 font-medium text-base"
+            disabled={loading}
+            className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 font-medium text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           >
-            <i className="fas fa-arrow-left mr-2"></i>
+            <ArrowLeft className="mr-2" size={16} />
             Précédent
           </button>
         ) : <div></div>}
 
         <button
-          onClick={onNext}
-          disabled={!isFormValid}
+          onClick={onSubmit}
+          disabled={!isFormValid || loading}
           className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg text-base disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
         >
           <span className="flex items-center">
-            {!isFormValid
-              ? 'Veuillez remplir tous les champs'
-              : isLastQuestion
-                ? 'Terminer'
-                : 'Question suivante'
-            }
-            <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+            {loading ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                Envoi en cours...
+              </>
+            ) : !isFormValid ? (
+              'Veuillez remplir tous les champs'
+            ) : (
+              <>
+                Terminer
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={16} />
+              </>
+            )}
           </span>
         </button>
       </div>
@@ -282,7 +327,9 @@ const QuestionScreen = ({
   onAnswerSelect,
   onFormChange,
   onNext,
-  onPrevious
+  onPrevious,
+  onSubmit,
+  loading
 }) => {
   const isLastQuestion = currentIndex === totalQuestions - 1;
 
@@ -292,10 +339,11 @@ const QuestionScreen = ({
         question={question}
         contactData={contactData}
         onChange={onFormChange}
-        onNext={onNext}
+        onSubmit={onSubmit}
         onPrevious={onPrevious}
         currentIndex={currentIndex}
         totalQuestions={totalQuestions}
+        loading={loading}
       />
     );
   }
@@ -328,9 +376,9 @@ const QuestionScreen = ({
         {currentIndex > 0 ? (
           <button
             onClick={onPrevious}
-            className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 font-medium text-base"
+            className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 font-medium text-base flex items-center"
           >
-            <i className="fas fa-arrow-left mr-2"></i>
+            <ArrowLeft className="mr-2" size={16} />
             Précédent
           </button>
         ) : <div></div>}
@@ -343,11 +391,9 @@ const QuestionScreen = ({
           <span className="flex items-center">
             {selectedAnswer === null
               ? 'Sélectionnez une réponse'
-              : isLastQuestion
-                ? 'Terminer'
-                : 'Question suivante'
+              : 'Question suivante'
             }
-            <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+            <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={16} />
           </span>
         </button>
       </div>
@@ -356,7 +402,7 @@ const QuestionScreen = ({
 };
 
 // Composant Popup de Confirmation
-const ConfirmationPopup = ({ isOpen, onConfirm, onCancel, userAnswers, contactData }) => {
+const ConfirmationPopup = ({ isOpen, onConfirm, onCancel, userAnswers, contactData, loading }) => {
   if (!isOpen) return null;
 
   return (
@@ -364,7 +410,7 @@ const ConfirmationPopup = ({ isOpen, onConfirm, onCancel, userAnswers, contactDa
       <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full max-h-[80vh] overflow-y-auto shadow-2xl animate-fade-in">
         <div className="text-center mb-6">
           <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i className="fas fa-check text-green-600 text-2xl"></i>
+            <Check className="text-green-600" size={32} />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
             Confirmer vos informations
@@ -400,15 +446,24 @@ const ConfirmationPopup = ({ isOpen, onConfirm, onCancel, userAnswers, contactDa
         <div className="flex space-x-4">
           <button
             onClick={onCancel}
-            className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 font-medium"
+            disabled={loading}
+            className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Modifier
           </button>
           <button
             onClick={onConfirm}
-            className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+            disabled={loading}
+            className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
-            Confirmer
+            {loading ? (
+              <span className="flex items-center justify-center">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                Envoi en cours...
+              </span>
+            ) : (
+              'Confirmer'
+            )}
           </button>
         </div>
       </div>
@@ -421,13 +476,13 @@ const ResultsScreen = ({ onRestart }) => {
   return (
     <div className="text-center animate-fade-in">
       <div className="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
-        <i className="fas fa-check text-green-600 text-3xl"></i>
+        <Check className="text-green-600" size={48} />
       </div>
       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-        Merci pour vos réponses !
+        Demande enregistrée avec succès !
       </h2>
       <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-        Nos conseillers vous rappellent bientôt ✨
+        Votre demande va être traitée. Un conseiller vous contactera prochainement pour vous proposer les meilleures offres d'assurance adaptées à votre profil.
       </p>
       <button
         onClick={onRestart}
@@ -468,33 +523,17 @@ const Comparison = () => {
   const handleNext = () => {
     const currentQuestion = quizData[currentQuestionIndex];
 
-    // Enregistrer la réponse
+    // Enregistrer la réponse pour les questions à choix multiples
     const newUserAnswers = [...userAnswers];
-
-    if (currentQuestion.type === 'form') {
-      // Pour la question formulaire, on stocke toutes les données de contact
-      newUserAnswers[currentQuestionIndex] = {
-        questionIndex: currentQuestionIndex,
-        formData: contactData
-      };
-    } else {
-      // Pour les questions à choix multiples
-      newUserAnswers[currentQuestionIndex] = {
-        questionIndex: currentQuestionIndex,
-        answerIndex: selectedAnswer,
-        answerText: currentQuestion.options[selectedAnswer].text
-      };
-    }
+    newUserAnswers[currentQuestionIndex] = {
+      questionIndex: currentQuestionIndex,
+      answerIndex: selectedAnswer,
+      answerText: currentQuestion.options[selectedAnswer].text
+    };
 
     setUserAnswers(newUserAnswers);
-
-    // Aller à la question suivante ou montrer la confirmation
-    if (currentQuestionIndex < quizData.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedAnswer(null);
-    } else {
-      setShowConfirmation(true);
-    }
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+    setSelectedAnswer(null);
   };
 
   const handlePrevious = () => {
@@ -514,26 +553,42 @@ const Comparison = () => {
     }
   };
 
+  // Fonction pour soumettre le formulaire directement
+  const handleSubmit = () => {
+    // Enregistrer d'abord les données du formulaire dans userAnswers
+    const newUserAnswers = [...userAnswers];
+    newUserAnswers[currentQuestionIndex] = {
+      questionIndex: currentQuestionIndex,
+      formData: contactData
+    };
+    setUserAnswers(newUserAnswers);
+
+    // Afficher la popup de confirmation
+    setShowConfirmation(true);
+  };
+
   const handleConfirm = async () => {
     setLoading(true);
+
     try {
       const response = await fetch("https://server-assurance.onrender.com/users/register", {
         method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contactData)
       });
 
+      const data = await response.json();
+
       if (response.ok) {
+        // Fermer la popup et afficher le message de succès
         setShowConfirmation(false);
         setIsCompleted(true);
       } else {
-        throw new Error('Erreur lors de l\'envoi');
+        alert(data.message || "Une erreur est survenue");
       }
     } catch (error) {
       console.error(error);
-      alert("Une erreur est survenue, veuillez réessayer.");
+      alert("Erreur réseau ou serveur");
     } finally {
       setLoading(false);
     }
@@ -586,6 +641,8 @@ const Comparison = () => {
             onFormChange={handleFormChange}
             onNext={handleNext}
             onPrevious={handlePrevious}
+            onSubmit={handleSubmit}
+            loading={loading}
           />
         ) : (
           <ResultsScreen onRestart={handleRestart} />
@@ -597,6 +654,7 @@ const Comparison = () => {
           onCancel={handleCancel}
           userAnswers={userAnswers}
           contactData={contactData}
+          loading={loading}
         />
 
         {loading && (

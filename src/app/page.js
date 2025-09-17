@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 // import './App.css'
 import Comparison from '../component/Comparison';
-
+import { Star, Section } from "lucide-react";
 const Home = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState({});
@@ -92,6 +92,62 @@ const Home = () => {
     setShowComparison(true);
   };
 
+
+
+  const reviews = [
+    {
+      name: "Alice",
+      role: "Client satisfait",
+      text: "AssuranceMax.ch m'a aidé à trouver la meilleure assurance auto en Suisse. Très pratique !",
+      rating: 5,
+    },
+    {
+      name: "Bob",
+      role: "Utilisateur",
+      text: "Comparateur clair et rapide. Je recommande pour tout type d'assurance.",
+      rating: 4,
+    },
+    {
+      name: "Charlie",
+      role: "Client fidèle",
+      text: "Excellent suivi et interface intuitive pour comparer mes assurances.",
+      rating: 5,
+    },
+    {
+      name: "David",
+      role: "Utilisateur",
+      text: "Simple, rapide et fiable. Très bon comparateur suisse.",
+      rating: 5,
+    },
+    {
+      name: "Emma",
+      role: "Client satisfait",
+      text: "J'ai trouvé l'assurance parfaite pour ma voiture grâce à AssuranceMax.ch !",
+      rating: 5,
+    },
+  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const sliderRef = useRef(null);
+
+  // Auto-scroll toutes les 3 secondes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Scroll effect
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (slider) {
+      slider.style.transition = "transform 0.7s ease";
+      slider.style.transform = `translateX(-${currentIndex * (100 / 3)}%)`;
+    }
+  }, [currentIndex]);
+
+
+
   return (
     <div className={`min-h-screen ${isDark ? 'dark' : ''}`}>
       <style>{`
@@ -126,7 +182,9 @@ const Home = () => {
         }
         
         .gradient-bg {
-          background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
+          background:linear-gradient(135deg, #667eea 0 %, #764ba2 100 %);
+
+          
         }
         
         .glass-card {
@@ -215,7 +273,9 @@ const Home = () => {
 }
 
 
-
+.background-hero {
+background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
+      }
 @media screen and (max-width:500px){
 
      .wrapper {
@@ -224,7 +284,9 @@ const Home = () => {
   }
       `}</style>
 
-      <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+
+
+      <div style={{ background: " linear - gradient(135deg, #667eea 0 %, #764ba2 100 %) " }} className="  text-gray-900 ">
 
         {/* Navigation */}
         <nav className="fixed top-0 w-full z-50 glass-card shadow-lg">
@@ -235,15 +297,15 @@ const Home = () => {
                   <span className="text-2xl">🛡️</span>
                 </div>
                 <div>
-                  <span className="text-xl font-bold bg-gradient-to-r from-red-400 to-teal-400 bg-clip-text text-transparent">
+                  <span className="text-md-xl text-sm font-bold bg-gradient-to-r from-red-400 to-teal-400 bg-clip-text text-transparent">
                     AssuranceMax.ch
                   </span>
                   <div className="text-xs text-gray-500">🇨🇭 Comparateur Suisse</div>
                 </div>
               </div>
               <div className="text-center">
-                <p>avis clients</p>
-                <div className="text-sm font-medium">4.9/5 ⭐ 2,847 avis</div>
+                <p className='text-xs text-md-xl text-gray-500'>avis clients</p>
+                <div className="text-xs font-medium">4.9/5 ⭐ 2,847 avis</div>
               </div>
             </div>
           </div>
@@ -256,7 +318,7 @@ const Home = () => {
         {currentSection === 'hero' && (
 
 
-          <section className="relative bg-gradient-to-r from-indigo-600 via-purple-600  text-white py-20">
+          <section className="relative bg-gradient-to-br from-indigo-500 to-purple-700  text-white py-20">
             {/* <div className="absolute top-40 left-10 text-3xl emoji-float" style={{ animationDelay: '0s' }}>💊</div>
             <div className="absolute top-32 right-20 text-4xl emoji-float" style={{ animationDelay: '1s' }}>🩺</div>
             <div className="absolute bottom-20 left-20 text-4xl emoji-float" style={{ animationDelay: '2s' }}>💰</div>
@@ -266,12 +328,12 @@ const Home = () => {
             <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
               {/* Col gauche - Texte */}
-              <div className="space-y-6">
-                <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
+              <div className="space-y-6 mt-5 mt-md-0">
+                <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
                   Trouvez l&#39;assurance{" "}
                   <span className="text-pink-300">parfaite</span> en Suisse
                 </h1>
-                <p className="text-lg md:text-xl text-gray-100">
+                <p className="text-md md:text-xl text-gray-100">
                   Comparez les meilleures offres d&#39;assurance maladie suisse en 2 minutes.{" "}
                   <span className="font-bold">Économisez jusquà 40% sur vos primes !</span>
                 </p>
@@ -393,7 +455,7 @@ const Home = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
 
-            <h2 className="text-4xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
+            <h2 className="text-md-4xl text-2xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">Nous comparons les offres des assureurs les plus reconnus de Suisse pour vous garantir le meilleur choix</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8" id="results-container">
@@ -411,9 +473,9 @@ const Home = () => {
 
               </div>
               <div className="text-center my-6">
-                <div className="text-3xl font-bold text-primary">156 CHF/mois</div>
-                <div className="text-sm text-gray-500 line-through">Avant: 285 CHF</div>
-                <div className="text-green-600 font-medium">Économie: 129 CHF/mois</div>
+
+                <div className="text-green-600 font-medium">Jusqu'à 40%
+                  d'économies par an</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-sm">
@@ -437,7 +499,7 @@ const Home = () => {
                 <div className="flex items-center space-x-2">
                   <span className="text-3xl">🥈</span>
                   <div>
-                    <h3 className="text-lg font-bold">Concordia</h3>
+                    <h3 className="text-lg font-bold">Helsana</h3>
                     <div className="flex items-center">
                       Spécialiste familial
                     </div>
@@ -446,9 +508,9 @@ const Home = () => {
 
               </div>
               <div className="text-center my-6">
-                <div className="text-3xl font-bold text-primary">178 CHF/mois</div>
-                <div className="text-sm text-gray-500 line-through">Avant: 285 CHF</div>
-                <div className="text-green-600 font-medium">Économie: 107 CHF/mois</div>
+
+                <div className="text-green-600 font-medium">Jusqu'à 30%
+                  d'économies par an</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-sm">
@@ -472,7 +534,7 @@ const Home = () => {
                 <div className="flex items-center space-x-2">
                   <span className="text-3xl">🥉</span>
                   <div>
-                    <h3 className="text-lg font-bold">Swica</h3>
+                    <h3 className="text-lg font-bold">Assura</h3>
                     <div className="flex items-center">
                       Innovation digitale
                     </div>
@@ -481,9 +543,9 @@ const Home = () => {
 
               </div>
               <div className="text-center my-6">
-                <div className="text-3xl font-bold text-primary">189 CHF/mois</div>
-                <div className="text-sm text-gray-500 line-through">Avant: 285 CHF</div>
-                <div className="text-green-600 font-medium">Économie: 96 CHF/mois</div>
+
+                <div className="text-green-600 font-medium">Jusqu'à 28%
+                  d'économies par an</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-sm">
@@ -506,6 +568,61 @@ const Home = () => {
 
         </div>
       </section>
+      <section className=' bg-gradient-to-br from-indigo-500 to-purple-700 '>
+        <div className="relative  d-flex justify-center mx-auto py-12 px-4 overflow-hidden">
+          <div
+            ref={sliderRef}
+            className="flex"
+            style={{ width: `${(reviews.length / 3) * 100}%` }}
+          >
+            {reviews.map((review, index) => (
+              <div key={index} className="flex-none w-1/3 px-2">
+                <div className="bg-white text-gray-900 rounded-xl shadow-lg p-6 h-full">
+                  <p className="text-gray-800 italic mb-4">{review.text}</p>
+                  <div className="flex items-center mb-2">
+                    {Array(review.rating)
+                      .fill(0)
+                      .map((_, i) => (
+                        <Star key={i} className="w-5 h-5 text-yellow-400" />
+                      ))}
+                  </div>
+                  <h3 className="font-bold text-lg">{review.name}</h3>
+                  <p className="text-gray-500">{review.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <footer className="bg-gray-900 text-gray-100 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-6 md:space-y-0">
+
+            {/* Section contact */}
+            <div>
+              <h2 className="text-lg font-semibold mb-2">Contact</h2>
+              <p className="text-gray-400">Téléphone : <a href="tel:+41225552632" className="text-blue-400 hover:text-blue-600">+216 12 345 678</a></p>
+              <p className="text-gray-400 mt-1">Email : <a href="mailto:contact@example.com" className="text-blue-400 hover:text-blue-600">contact@example.com</a></p>
+            </div>
+
+
+          </div>
+
+
+
+
+
+
+
+          {/* Bas de footer */}
+          <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500 text-sm">
+            &copy; {new Date().getFullYear()} AssuranceMax.ch. Tous droits réservés.
+          </div>
+        </div>
+      </footer>
+
+
+
 
 
     </div>
