@@ -305,7 +305,7 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
               </div>
               <div className="text-center">
                 <p className='text-xs text-md-xl text-gray-500'>avis clients</p>
-                <div className="text-xs font-medium">4.9/5 ⭐ 2,847 avis</div>
+                <div className="text-xs font-medium text-black ">4.9/5 ⭐ 2,847 avis</div>
               </div>
             </div>
           </div>
@@ -602,7 +602,6 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
             <div>
               <h2 className="text-lg font-semibold mb-2">Contact</h2>
               <p className="text-gray-400">Téléphone : <a href="tel:+41225552632" className="text-blue-400 hover:text-blue-600">+41225552632</a></p>
-              <p className="text-gray-400 mt-1">Email : <a href="mailto:contact@example.com" className="text-blue-400 hover:text-blue-600">contact@example.com</a></p>
             </div>
 
 
@@ -615,8 +614,11 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
 
 
           {/* Bas de footer */}
-          <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500 text-sm">
+          {/* <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500 text-sm">
             &copy; {new Date().getFullYear()} AssuranceMax.ch. Tous droits réservés.
+          </div> */}
+          <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500 text-sm">
+            &copy; 2026 Tous droits réservés.
           </div>
         </div>
       </footer>
