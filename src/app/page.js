@@ -135,7 +135,7 @@ const Home = () => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [reviews.length]);
 
   // Scroll effect
   useEffect(() => {
@@ -334,7 +334,7 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
                   <span className="text-pink-300">parfaite</span> en Suisse
                 </h1>
                 <p className="text-md md:text-xl text-gray-100">
-                  Comparez les meilleures offres d&#39;assurance maladie suisse en 2 minutes.{" "}
+                  Comparez les meilleures offres d&#39;assurance maladie suisse en 2 minutes.
                   <span className="font-bold">Économisez jusquà 40% sur vos primes !</span>
                 </p>
 
