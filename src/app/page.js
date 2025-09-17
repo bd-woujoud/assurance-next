@@ -474,8 +474,8 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
               </div>
               <div className="text-center my-6">
 
-                <div className="text-green-600 font-medium">Jusqu'à 40%
-                  d'économies par an</div>
+                <div className="text-green-600 font-medium">Jusqu&apos;à 40%
+                  d&apos;économies par an</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-sm">
@@ -509,8 +509,8 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
               </div>
               <div className="text-center my-6">
 
-                <div className="text-green-600 font-medium">Jusqu'à 30%
-                  d'économies par an</div>
+                <div className="text-green-600 font-medium">Jusqu&apos;à 30%
+                  d&apos;économies par an</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-sm">
@@ -544,8 +544,8 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
               </div>
               <div className="text-center my-6">
 
-                <div className="text-green-600 font-medium">Jusqu'à 28%
-                  d'économies par an</div>
+                <div className="text-green-600 font-medium">Jusqu&apos;à 28%
+                  d&apos;économies par an</div>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center text-sm">
