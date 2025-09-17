@@ -601,7 +601,7 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
             {/* Section contact */}
             <div>
               <h2 className="text-lg font-semibold mb-2">Contact</h2>
-              <p className="text-gray-400">Téléphone : <a href="tel:+41225552632" className="text-blue-400 hover:text-blue-600">+216 12 345 678</a></p>
+              <p className="text-gray-400">Téléphone : <a href="tel:+41225552632" className="text-blue-400 hover:text-blue-600">+41225552632</a></p>
               <p className="text-gray-400 mt-1">Email : <a href="mailto:contact@example.com" className="text-blue-400 hover:text-blue-600">contact@example.com</a></p>
             </div>
 
