@@ -482,7 +482,7 @@ const ResultsScreen = ({ onRestart }) => {
         Demande enregistrée avec succès !
       </h2>
       <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-        Votre demande va être traitée. Un conseiller vous contactera prochainement pour vous proposer les meilleures offres d&apos;assurance adaptées à votre profil.
+        Votre demande va être traitée. Un conseiller vous contactera prochainement pour vous proposer les meilleures offres d&#39;assurance adaptées à votre profil.
       </p>
       <button
         onClick={onRestart}
