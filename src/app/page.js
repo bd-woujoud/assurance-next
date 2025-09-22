@@ -1,9 +1,8 @@
-
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
 // import './App.css'
 import Comparison from '../component/Comparison';
-import { Star, Section } from "lucide-react";
+import { Star, Section, Menu, X } from "lucide-react";
 const Home = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState({});
@@ -12,6 +11,7 @@ const Home = () => {
   const [age, setAge] = useState(35);
   const [selectedMethod, setSelectedMethod] = useState('');
   const [phone, setPhone] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const totalQuestions = 4;
 
@@ -35,9 +35,6 @@ const Home = () => {
       }, 1000);
     }
   }, [currentSection]);
-
-
-
 
   const generateResults = () => {
     const offers = [
@@ -76,9 +73,7 @@ const Home = () => {
     return offers;
   };
 
-
   const [showComparison, setShowComparison] = useState(false);
-
   const comparisonRef = useRef();
 
   // Scroll automatique après rendu
@@ -92,7 +87,22 @@ const Home = () => {
     setShowComparison(true);
   };
 
+  // Navigation items
+  const navItems = [
+    { name: 'Accueil', href: '#hero' },
+    { name: 'Comparaison', href: '#comparison' },
+    { name: 'Assureurs', href: '#results' },
+    { name: 'Avis', href: '#reviews' },
+    { name: 'Contact', href: '#contact' }
+  ];
 
+  const scrollToSection = (href) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   const reviews = [
     {
@@ -146,8 +156,6 @@ const Home = () => {
     }
   }, [currentIndex]);
 
-
-
   return (
     <div className={`min-h-screen ${isDark ? 'dark' : ''}`}>
       <style>{`
@@ -183,8 +191,6 @@ const Home = () => {
         
         .gradient-bg {
           background:linear-gradient(135deg, #667eea 0 %, #764ba2 100 %);
-
-          
         }
         
         .glass-card {
@@ -214,80 +220,80 @@ const Home = () => {
         .animate-shake { animation: shake 0.5s ease-in-out; }
         .animate-heart-beat { animation: heartBeat 1.5s ease-in-out infinite; }
 
-     .wrapper {
-    width: 100%;
-    height: 100vh;
-    /* plein écran */
-    position: relative;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
+        .wrapper {
+          width: 100%;
+          height: 100vh;
+          /* plein écran */
+          position: relative;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
 
-.inner {
-    --w: 100px;
-    --h: 150px;
-    --translateZ: calc((var(--w) + var(--h)) + 0px);
-    --rotateX: -15deg;
-    --perspective: 1000px;
-    position: absolute;
-    width: var(--w);
-    height: var(--h);
-    top: 25%;
-    left: calc(50% - (var(--w) / 2) - 2.5px);
-    z-index: 2;
-    transform-style: preserve-3d;
-    transform: perspective(var(--perspective));
-    animation: rotating 20s linear infinite;
-}
+        .inner {
+          --w: 100px;
+          --h: 150px;
+          --translateZ: calc((var(--w) + var(--h)) + 0px);
+          --rotateX: -15deg;
+          --perspective: 1000px;
+          position: absolute;
+          width: var(--w);
+          height: var(--h);
+          top: 25%;
+          left: calc(50% - (var(--w) / 2) - 2.5px);
+          z-index: 2;
+          transform-style: preserve-3d;
+          transform: perspective(var(--perspective));
+          animation: rotating 20s linear infinite;
+        }
 
-@keyframes rotating {
-    from {
-        transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0);
-    }
+        @keyframes rotating {
+          from {
+            transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0);
+          }
+          to {
+            transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn);
+          }
+        }
 
-    to {
-        transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn);
-    }
-}
+        .card {
+          position: absolute;
+          border: 2px solid rgba(var(--color-card));
+          border-radius: 12px;
+          overflow: hidden;
+          inset: 0;
+          transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+        }
 
-.card {
-    position: absolute;
-    border: 2px solid rgba(var(--color-card));
-    border-radius: 12px;
-    overflow: hidden;
-    inset: 0;
-    transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
-}
+        .img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          background: #0000 radial-gradient(circle,
+              rgba(var(--color-card), 0.2) 0%,
+              rgba(var(--color-card), 0.6) 80%,
+              rgba(var(--color-card), 0.9) 100%);
+        }
 
-.img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background: #0000 radial-gradient(circle,
-            rgba(var(--color-card), 0.2) 0%,
-            rgba(var(--color-card), 0.6) 80%,
-            rgba(var(--color-card), 0.9) 100%);
-}
+        .hero-bg {
+          background-image: 
+            linear-gradient(135deg, rgba(102, 126, 234, 0.85) 0%, rgba(118, 75, 162, 0.85) 100%),
+            url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+        }
 
-
-.background-hero {
-background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
-      }
-@media screen and (max-width:500px){
-
-     .wrapper {
-
-    height: 500px;
-  }
+        @media screen and (max-width:500px){
+          .wrapper {
+            height: 500px;
+          }
+        }
       `}</style>
 
-
-
-      <div style={{ background: " linear - gradient(135deg, #667eea 0 %, #764ba2 100 %) " }} className="  text-gray-900 ">
-
+      <div className="text-gray-900">
         {/* Navigation */}
         <nav className="fixed top-0 w-full z-50 glass-card shadow-lg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -303,77 +309,128 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
                   <div className="text-xs text-gray-500">🇨🇭 Comparateur Suisse</div>
                 </div>
               </div>
-              <div className="text-center">
+
+              {/* Navigation desktop */}
+              <div className="hidden md:flex items-center space-x-6">
+                {navItems.map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={() => scrollToSection(item.href)}
+                    className="text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-200"
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              </div>
+
+              <div className="hidden md:block text-center">
                 <p className='text-xs text-md-xl text-gray-500'>avis clients</p>
-                <div className="text-xs font-medium text-black ">4.9/5 ⭐ 2,847 avis</div>
+                <div className="text-xs font-medium text-black">4.9/5 ⭐ 2,847 avis</div>
+              </div>
+
+              {/* Menu mobile */}
+              <div className="md:hidden flex items-center space-x-4">
+                <div className="text-center">
+                  <div className="text-xs font-medium text-black">4.9/5 ⭐</div>
+                </div>
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="text-gray-700 hover:text-indigo-600"
+                >
+                  {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
               </div>
             </div>
+
+            {/* Menu mobile déroulant */}
+            {isMobileMenuOpen && (
+              <div className="md:hidden bg-white border-t border-gray-200">
+                <div className="px-2 pt-2 pb-3 space-y-1">
+                  {navItems.map((item) => (
+                    <button
+                      key={item.name}
+                      onClick={() => scrollToSection(item.href)}
+                      className="block w-full text-left px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 font-medium transition-colors duration-200"
+                    >
+                      {item.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </nav>
 
         {/* Hero Section */}
-
-
-
         {currentSection === 'hero' && (
-
-
-          <section className="relative bg-gradient-to-br from-indigo-500 to-purple-700  text-white py-20">
-            {/* <div className="absolute top-40 left-10 text-3xl emoji-float" style={{ animationDelay: '0s' }}>💊</div>
-            <div className="absolute top-32 right-20 text-4xl emoji-float" style={{ animationDelay: '1s' }}>🩺</div>
-            <div className="absolute bottom-20 left-20 text-4xl emoji-float" style={{ animationDelay: '2s' }}>💰</div>
-            <div className="absolute top-1/2 right-10 text-5xl emoji-float" style={{ animationDelay: '3s' }}>🎯</div>
-            <div className="absolute bottom-20 right-1/3 text-6xl emoji-float" style={{ animationDelay: '4s' }}>🔥</div> */}
-
+          <section id="hero" className="relative hero-bg text-white py-20">
             <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-
               {/* Col gauche - Texte */}
               <div className="space-y-6 mt-5 mt-md-0">
                 <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
-                  Trouvez l&apos;assurance{" "}
-                  <span className="text-pink-300">parfaite</span> en Suisse
+                  Comparateur d&apos;assurance{" "}
+                  <span className="text-pink-300">maladie</span> Suisse
                 </h1>
                 <p className="text-md md:text-xl text-gray-100">
-                  Comparez les meilleures offres d&apos;assurance maladie suisse en 2 minutes.
-                  <span className="font-bold">Économisez jusquà 40% sur vos primes !</span>
+                  Notre plateforme compare instantanément toutes les caisses-maladie suisses pour vous.
+                  <span className="font-bold"> Trouvez la meilleure offre en 3 clics !</span>
                 </p>
 
                 {/* Avantages */}
                 <div className="flex flex-wrap gap-6 text-sm md:text-base">
                   <div className="flex items-center gap-2">
-                    <span className="text-pink-300 text-lg">🛡️</span>
-                    Sécurisé & Gratuit
+                    <span className="text-pink-300 text-lg">📊</span>
+                    Comparaison gratuite
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-green-300 text-lg">💰</span>
-                    Économies garanties
+                    <span className="text-green-300 text-lg">🏥</span>
+                    Toutes les caisses-maladie
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-yellow-300 text-lg">👨‍👩‍👧‍👦</span>
-                    +50&apos;000 familles
+                    <span className="text-yellow-300 text-lg">⚡</span>
+                    Résultats instantanés
                   </div>
                 </div>
 
                 {/* Boutons */}
                 <div className="flex gap-4">
                   <button onClick={handleStart} className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:bg-gray-100 transition">
-                    Commencer ma comparaison →
+                    Comparer les assurances →
                   </button>
+                </div>
 
+                {/* Stats de confiance */}
+                <div className="mt-6 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                  <div className="flex flex-wrap justify-between items-center gap-4 text-center">
+                    <div>
+                      <div className="text-2xl font-bold">15+</div>
+                      <div className="text-sm opacity-80">Assureurs comparés</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold">50K+</div>
+                      <div className="text-sm opacity-80">Clients satisfaits</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold">2.1K CHF</div>
+                      <div className="text-sm opacity-80">Économie moyenne/an</div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Logos assurances */}
-                <p className="mt-4 text-sm opacity-80">Déjà utilisé par :</p>
-                <div className="flex gap-6 text-sm md:text-base font-medium">
-                  <span>CSS Assurance</span>
+                <p className="mt-4 text-sm opacity-80">Nous comparons toutes les principales caisses-maladie :</p>
+                <div className="flex flex-wrap gap-4 text-sm md:text-base font-medium">
+                  <span>CSS</span>
                   <span>Swica</span>
                   <span>Helsana</span>
                   <span>Concordia</span>
+                  <span>Assura</span>
+                  <span>Groupe Mutuel</span>
                 </div>
               </div>
 
               {/* Col droite - Carrousel */}
-              <div className="flex justify-center relative ">
+              <div className="flex justify-center relative">
                 <div className="wrapper">
                   <div className="inner" style={{ "--quantity": 10 }}>
                     <div className="card" style={{ "--index": 0, "--color-card": "142, 249, 252" }}>
@@ -431,204 +488,329 @@ background:  linear-gradient(135deg, #667eea 0 %, #764ba2 100 %) !important ,
               </div>
             </div>
           </section>
-
-
         )}
 
-
-
-
         {showComparison && (
-          <div ref={comparisonRef} className='mb-5'>
+          <div id="comparison" ref={comparisonRef} className='mb-5'>
             <Comparison />
           </div>
         )}
 
-      </div>
-
-
-
-
-
-
-      <section id="results" className="min-h-screen py-20 bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800" style={{ display: 'block' }}>
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-
-            <h2 className="text-md-4xl text-2xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400">Nous comparons les offres des assureurs les plus reconnus de Suisse pour vous garantir le meilleur choix</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8" id="results-container">
-            <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0s' }}>
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center space-x-2">
-                  <span className="text-3xl">🥇</span>
-                  <div>
-                    <h3 className="text-lg font-bold">CSS Assurance </h3>
-                    <div className="flex items-center">
-                      Meilleur rapport qualité-prix
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div className="text-center my-6">
-
-                <div className="text-green-600 font-medium">Jusqu&apos;à 40%
-                  d&apos;économies par an</div>
-              </div>
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-center text-sm">
-                  <span className="mr-2">🌍</span>
-                  <span>Couverture mondiale</span>
-                </li>
-                <li className="flex items-center text-sm">
-                  <span className="mr-2">🌿</span>
-                  <span>Médecines alternatives</span>
-                </li>
-                <li className="flex items-center text-sm">
-                  <span className="mr-2">📱</span>
-                  <span>Téléconsultation 24h/7j</span>
-                </li>
-              </ul>
-
-
+        <section id="results" className="min-h-screen py-20 flex items-center  bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-md-4xl text-2xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400">Nous comparons les offres des assureurs les plus reconnus de Suisse pour vous garantir le meilleur choix</p>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0.2s' }}>
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center space-x-2">
-                  <span className="text-3xl">🥈</span>
-                  <div>
-                    <h3 className="text-lg font-bold">Helsana</h3>
-                    <div className="flex items-center">
-                      Spécialiste familial
+            <div className="grid md:grid-cols-3 gap-8" id="results-container">
+              <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0s' }}>
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-3xl">🥇</span>
+                    <div>
+                      <h3 className="text-lg font-bold">CSS Assurance </h3>
+                      <div className="flex items-center">
+                        Meilleur rapport qualité-prix
+                      </div>
                     </div>
                   </div>
                 </div>
-
+                <div className="text-center my-6">
+                  <div className="text-green-600 font-medium">Jusqu&apos;à 40%
+                    d&apos;économies par an</div>
+                </div>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center text-sm">
+                    <span className="mr-2">🌍</span>
+                    <span>Couverture mondiale</span>
+                  </li>
+                  <li className="flex items-center text-sm">
+                    <span className="mr-2">🌿</span>
+                    <span>Médecines alternatives</span>
+                  </li>
+                  <li className="flex items-center text-sm">
+                    <span className="mr-2">📱</span>
+                    <span>Téléconsultation 24h/7j</span>
+                  </li>
+                </ul>
               </div>
-              <div className="text-center my-6">
-
-                <div className="text-green-600 font-medium">Jusqu&apos;à 30%
-                  d&apos;économies par an</div>
-              </div>
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-center text-sm">
-                  <span className="mr-2">⚡</span>
-                  <span>Assurance famille</span>
-                </li>
-                <li className="flex items-center text-sm">
-                  <span className="mr-2">⚡</span>
-                  <span>Médecine alternative</span>
-                </li>
-                <li className="flex items-center text-sm">
-                  <span className="mr-2">⚡</span>
-                  <span>Conseil personnalisé</span>
-                </li>
-
-              </ul>
-
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0.4s' }}>
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center space-x-2">
-                  <span className="text-3xl">🥉</span>
-                  <div>
-                    <h3 className="text-lg font-bold">Assura</h3>
-                    <div className="flex items-center">
-                      Innovation digitale
+              <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0.2s' }}>
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-3xl">🥈</span>
+                    <div>
+                      <h3 className="text-lg font-bold">Helsana</h3>
+                      <div className="flex items-center">
+                        Spécialiste familial
+                      </div>
                     </div>
                   </div>
                 </div>
-
+                <div className="text-center my-6">
+                  <div className="text-green-600 font-medium">Jusqu&apos;à 30%
+                    d&apos;économies par an</div>
+                </div>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center text-sm">
+                    <span className="mr-2">⚡</span>
+                    <span>Assurance famille</span>
+                  </li>
+                  <li className="flex items-center text-sm">
+                    <span className="mr-2">⚡</span>
+                    <span>Médecine alternative</span>
+                  </li>
+                  <li className="flex items-center text-sm">
+                    <span className="mr-2">⚡</span>
+                    <span>Conseil personnalisé</span>
+                  </li>
+                </ul>
               </div>
-              <div className="text-center my-6">
-
-                <div className="text-green-600 font-medium">Jusqu&apos;à 28%
-                  d&apos;économies par an</div>
+              <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0.4s' }}>
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-3xl">🥉</span>
+                    <div>
+                      <h3 className="text-lg font-bold">Assura</h3>
+                      <div className="flex items-center">
+                        Innovation digitale
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center my-6">
+                  <div className="text-green-600 font-medium">Jusqu&apos;à 28%
+                    d&apos;économies par an</div>
+                </div>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center text-sm">
+                    <span className="mr-2">👑</span>
+                    <span>Remboursements rapides</span>
+                  </li>
+                  <li className="flex items-center text-sm">
+                    <span className="mr-2">👑</span>
+                    <span>IA diagnostique</span>
+                  </li>
+                  <li className="flex items-center text-sm">
+                    <span className="mr-2">👑</span>
+                    <span>App mobile primée</span>
+                  </li>
+                </ul>
               </div>
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-center text-sm">
-                  <span className="mr-2">👑</span>
-                  <span>Remboursements rapides</span>
-                </li>
-                <li className="flex items-center text-sm">
-                  <span className="mr-2">👑</span>
-                  <span>IA diagnostique</span>
-                </li>
-                <li className="flex items-center text-sm">
-                  <span className="mr-2">👑</span>
-                  <span>App mobile primée</span>
-                </li>
-
-              </ul>
-
             </div>
           </div>
+        </section>
 
-        </div>
-      </section>
-      <section className=' bg-gradient-to-br from-indigo-500 to-purple-700 '>
-        <div className="relative  d-flex justify-center mx-auto py-12 px-4 overflow-hidden">
-          <div
-            ref={sliderRef}
-            className="flex"
-            style={{ width: `${(reviews.length / 3) * 100}%` }}
-          >
-            {reviews.map((review, index) => (
-              <div key={index} className="flex-none w-1/3 px-2">
-                <div className="bg-white text-gray-900 rounded-xl shadow-lg p-6 h-full">
-                  <p className="text-gray-800 italic mb-4">{review.text}</p>
-                  <div className="flex items-center mb-2">
-                    {Array(review.rating)
-                      .fill(0)
-                      .map((_, i) => (
-                        <Star key={i} className="w-5 h-5 text-yellow-400" />
+        <section id="reviews" className='bg-gradient-to-br from-gray-50 to-blue-50 py-20'>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Header de section */}
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                Ce que disent nos clients
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Découvrez pourquoi plus de 50,000 familles suisses nous font confiance pour leurs assurances
+              </p>
+              <div className="flex items-center justify-center mt-6 space-x-2">
+                <div className="flex">
+                  {Array(5).fill(0).map((_, i) => (
+                    <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <span className="text-2xl font-bold text-gray-900">4.9/5</span>
+                <span className="text-gray-600">(2,847 avis)</span>
+              </div>
+            </div>
+
+            {/* Grid des avis */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Avis 1 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div className="flex items-start space-x-4 mb-6">
+                  <div className="w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    M
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg text-gray-900">Marie Dubois</h4>
+                    <p className="text-gray-500">Maman de 3 enfants</p>
+                    <div className="flex mt-1">
+                      {Array(5).fill(0).map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                       ))}
+                    </div>
                   </div>
-                  <h3 className="font-bold text-lg">{review.name}</h3>
-                  <p className="text-gray-500">{review.role}</p>
+                </div>
+                <blockquote className="text-gray-700 italic leading-relaxed">
+                  "Grâce à AssuranceMax.ch, j'ai économisé plus de 2000 CHF par an sur notre assurance famille !
+                  Le processus était simple et rapide. Je recommande vivement."
+                </blockquote>
+                <div className="mt-4 text-sm text-gray-500">
+                  ✅ Économie réalisée: 2,100 CHF/an
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <footer className="bg-gray-900 text-gray-100 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-6 md:space-y-0">
 
-            {/* Section contact */}
-            <div>
-              <h2 className="text-lg font-semibold mb-2">Contact</h2>
-              <p className="text-gray-400">Téléphone : <a href="tel:+41225552632" className="text-blue-400 hover:text-blue-600">+41225552632</a></p>
+              {/* Avis 2 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div className="flex items-start space-x-4 mb-6">
+                  <div className="w-14 h-14 bg-gradient-to-r from-green-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    J
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg text-gray-900">Jean-Luc Martin</h4>
+                    <p className="text-gray-500">Entrepreneur, Genève</p>
+                    <div className="flex mt-1">
+                      {Array(5).fill(0).map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <blockquote className="text-gray-700 italic leading-relaxed">
+                  "Interface très intuitive et service client exceptionnel. En 10 minutes,
+                  j'avais comparé toutes les offres et trouvé la meilleure assurance pour mon profil."
+                </blockquote>
+                <div className="mt-4 text-sm text-gray-500">
+                  ✅ Temps de comparaison: 10 minutes
+                </div>
+              </div>
+
+              {/* Avis 3 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div className="flex items-start space-x-4 mb-6">
+                  <div className="w-14 h-14 bg-gradient-to-r from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    S
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg text-gray-900">Sophie Chen</h4>
+                    <p className="text-gray-500">Étudiante, Lausanne</p>
+                    <div className="flex mt-1">
+                      {Array(5).fill(0).map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <blockquote className="text-gray-700 italic leading-relaxed">
+                  "Parfait pour les jeunes ! J'ai trouvé une assurance adaptée à mon budget d'étudiante.
+                  Le comparateur est gratuit et sans engagement."
+                </blockquote>
+                <div className="mt-4 text-sm text-gray-500">
+                  ✅ Assurance étudiante à partir de 89 CHF/mois
+                </div>
+              </div>
+
+              {/* Avis 4 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div className="flex items-start space-x-4 mb-6">
+                  <div className="w-14 h-14 bg-gradient-to-r from-orange-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    P
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg text-gray-900">Pierre Muller</h4>
+                    <p className="text-gray-500">Retraité, Zurich</p>
+                    <div className="flex mt-1">
+                      {Array(5).fill(0).map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <blockquote className="text-gray-700 italic leading-relaxed">
+                  "Excellent service ! À 65 ans, je pensais que changer d'assurance serait compliqué.
+                  L'équipe m'a accompagné tout au long du processus."
+                </blockquote>
+                <div className="mt-4 text-sm text-gray-500">
+                  ✅ Accompagnement personnalisé senior
+                </div>
+              </div>
+
+              {/* Avis 5 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div className="flex items-start space-x-4 mb-6">
+                  <div className="w-14 h-14 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    A
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg text-gray-900">Anna Rossi</h4>
+                    <p className="text-gray-500">Médecin, Bâle</p>
+                    <div className="flex mt-1">
+                      {Array(4).fill(0).map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                      ))}
+                      <Star className="w-4 h-4 text-gray-300" />
+                    </div>
+                  </div>
+                </div>
+                <blockquote className="text-gray-700 italic leading-relaxed">
+                  "En tant que professionnelle de santé, j'apprécie la transparence des informations.
+                  Les détails des couvertures sont clairs et précis."
+                </blockquote>
+                <div className="mt-4 text-sm text-gray-500">
+                  ✅ Comparaison détaillée des garanties
+                </div>
+              </div>
+
+              {/* Avis 6 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div className="flex items-start space-x-4 mb-6">
+                  <div className="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    T
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg text-gray-900">Thomas Weber</h4>
+                    <p className="text-gray-500">Ingénieur, Berne</p>
+                    <div className="flex mt-1">
+                      {Array(5).fill(0).map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <blockquote className="text-gray-700 italic leading-relaxed">
+                  "Processus 100% digital et sécurisé. J'ai pu comparer et souscrire directement en ligne.
+                  Gain de temps considérable !"
+                </blockquote>
+                <div className="mt-4 text-sm text-gray-500">
+                  ✅ Souscription en ligne sécurisée
+                </div>
+              </div>
             </div>
 
-
+            {/* Call to action */}
+            <div className="text-center mt-16">
+              <div className="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
+                <h3 className="text-2xl font-bold mb-4">Rejoignez nos clients satisfaits !</h3>
+                <p className="text-lg mb-6 opacity-90">
+                  Plus de 50,000 familles suisses ont déjà économisé sur leurs assurances
+                </p>
+                <button
+                  onClick={handleStart}
+                  className="bg-white text-indigo-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-colors duration-200 text-lg shadow-lg"
+                >
+                  Commencer ma comparaison gratuitement →
+                </button>
+              </div>
+            </div>
           </div>
+        </section>
 
+        <footer id="contact" className="bg-gray-900 text-gray-100 py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-6 md:space-y-0">
+              {/* Section contact */}
+              <div>
+                <h2 className="text-lg font-semibold mb-2">Contact</h2>
+                <p className="text-gray-400">Téléphone : <a href="tel:+41225552632" className="text-blue-400 hover:text-blue-600">+41225552632</a></p>
+              </div>
+            </div>
 
-
-
-
-
-
-          {/* Bas de footer */}
-          {/* <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} AssuranceMax.ch. Tous droits réservés.
-          </div> */}
-          <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500 text-sm">
-            &copy; 2026 Tous droits réservés.
+            {/* Bas de footer */}
+            <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500 text-sm">
+              &copy; 2026 Tous droits réservés.
+            </div>
           </div>
-        </div>
-      </footer>
-
-
-
-
-
+        </footer>
+      </div>
     </div>
-
   )
 }
 export default Home;
