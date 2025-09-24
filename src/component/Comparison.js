@@ -20,7 +20,6 @@ import {
   HelpCircle,
   Battery,
   UserPlus,
-  HelpCircle as Question,
   ArrowLeft,
   ArrowRight,
   Check,
@@ -28,8 +27,7 @@ import {
   Zap,
   Gift,
   Phone,
-  MapPinIcon,
-  IdCard
+  CreditCard
 } from 'lucide-react';
 
 // Données du quiz avec formulaire complet
@@ -108,7 +106,7 @@ const ProgressBar = ({ current, total }) => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-            <Question className="text-white" size={16} />
+            <HelpCircle className="text-white" size={16} />
           </div>
           <div>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Question</div>
@@ -167,14 +165,29 @@ const AnswerOption = ({ option, index, isSelected, onSelect }) => {
   );
 };
 
-// Composant Form Question (formulaire complet)
-const FormQuestion = ({ question, contactData, onChange, onSubmit, onPrevious, currentIndex, totalQuestions, loading }) => {
-  const isLastQuestion = currentIndex === totalQuestions - 1;
+// Composant Form Question - MODIFIÉ pour appeler directement onConfirm
+const FormQuestion = ({
+  question,
+  contactData,
+  onChange,
+  onConfirm, // Changé de onSubmit à onConfirm
+  onPrevious,
+  currentIndex,
+  totalQuestions,
+  loading,
+  errors = {}
+}) => {
   const isFormValid = contactData.firstName && contactData.lastName && contactData.phone && contactData.adresse;
   const IconComponent = question.icon;
 
   const handleChange = (field, value) => {
     onChange(field, value);
+  };
+
+  const handleSubmit = async () => {
+    if (isFormValid) {
+      await onConfirm(); // Appel direct de la fonction de confirmation
+    }
   };
 
   return (
@@ -210,11 +223,12 @@ const FormQuestion = ({ question, contactData, onChange, onSubmit, onPrevious, c
                 required
                 disabled={loading}
               />
+              {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
             </div>
 
             <div className="form-group">
               <label className="block text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                <IdCard className="inline mr-2 text-purple-500" size={20} />
+                <CreditCard className="inline mr-2 text-purple-500" size={20} />
                 Nom *
               </label>
               <input
@@ -226,6 +240,7 @@ const FormQuestion = ({ question, contactData, onChange, onSubmit, onPrevious, c
                 required
                 disabled={loading}
               />
+              {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
             </div>
 
             <div className="form-group">
@@ -242,11 +257,12 @@ const FormQuestion = ({ question, contactData, onChange, onSubmit, onPrevious, c
                 required
                 disabled={loading}
               />
+              {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
             </div>
 
             <div className="form-group">
               <label className="block text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                <MapPinIcon className="inline mr-2 text-red-500" size={20} />
+                <MapPin className="inline mr-2 text-red-500" size={20} />
                 Adresse *
               </label>
               <input
@@ -258,6 +274,7 @@ const FormQuestion = ({ question, contactData, onChange, onSubmit, onPrevious, c
                 required
                 disabled={loading}
               />
+              {errors.adresse && <p className="text-red-500 text-sm mt-1">{errors.adresse}</p>}
             </div>
           </div>
 
@@ -292,7 +309,7 @@ const FormQuestion = ({ question, contactData, onChange, onSubmit, onPrevious, c
         ) : <div></div>}
 
         <button
-          onClick={onSubmit}
+          onClick={handleSubmit}
           disabled={!isFormValid || loading}
           className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg text-base disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
         >
@@ -317,7 +334,7 @@ const FormQuestion = ({ question, contactData, onChange, onSubmit, onPrevious, c
   );
 };
 
-// Composant Question Screen
+// Composant Question Screen - MODIFIÉ pour supprimer onNext
 const QuestionScreen = ({
   question,
   currentIndex,
@@ -326,24 +343,23 @@ const QuestionScreen = ({
   contactData,
   onAnswerSelect,
   onFormChange,
-  onNext,
   onPrevious,
-  onSubmit,
-  loading
+  onConfirm,
+  loading,
+  errors = {}
 }) => {
-  const isLastQuestion = currentIndex === totalQuestions - 1;
-
   if (question.type === 'form') {
     return (
       <FormQuestion
         question={question}
         contactData={contactData}
         onChange={onFormChange}
-        onSubmit={onSubmit}
+        onConfirm={onConfirm} // Passé onConfirm au lieu de onSubmit
         onPrevious={onPrevious}
         currentIndex={currentIndex}
         totalQuestions={totalQuestions}
         loading={loading}
+        errors={errors}
       />
     );
   }
@@ -383,88 +399,16 @@ const QuestionScreen = ({
           </button>
         ) : <div></div>}
 
-        <button
-          onClick={onNext}
-          disabled={selectedAnswer === null}
-          className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg text-base disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-        >
-          <span className="flex items-center">
-            {selectedAnswer === null
-              ? 'Sélectionnez une réponse'
-              : 'Question suivante'
-            }
-            <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={16} />
-          </span>
-        </button>
-      </div>
-    </div>
-  );
-};
-
-// Composant Popup de Confirmation
-const ConfirmationPopup = ({ isOpen, onConfirm, onCancel, userAnswers, contactData, loading }) => {
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full max-h-[80vh] overflow-y-auto shadow-2xl animate-fade-in">
-        <div className="text-center mb-6">
-          <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Check className="text-green-600" size={32} />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            Confirmer vos informations
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            Vérifiez vos réponses avant de les envoyer
-          </p>
-        </div>
-
-        <div className="space-y-4 mb-6">
-          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Coordonnées :</h3>
-            <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
-              <p><strong>Nom :</strong> {contactData.firstName} {contactData.lastName}</p>
-              <p><strong>Téléphone :</strong> {contactData.phone}</p>
-              <p><strong>Adresse :</strong> {contactData.adresse}</p>
-            </div>
-          </div>
-
-          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Vos réponses :</h3>
-            <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
-              {userAnswers.slice(0, 5).map((answer, index) => (
-                <p key={index}>
-                  <strong>{quizData[index].question}</strong><br />
-                  {answer.answerText}
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex space-x-4">
-          <button
-            onClick={onCancel}
-            disabled={loading}
-            className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Modifier
-          </button>
-          <button
-            onClick={onConfirm}
-            disabled={loading}
-            className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-          >
-            {loading ? (
-              <span className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                Envoi en cours...
-              </span>
-            ) : (
-              'Confirmer'
-            )}
-          </button>
+        {/* Message informatif au lieu du bouton */}
+        <div className="text-center text-gray-500 dark:text-gray-400">
+          {selectedAnswer === null ? (
+            <p className="text-sm">Sélectionnez une réponse pour continuer</p>
+          ) : (
+            <p className="text-sm flex items-center">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
+              Passage à la question suivante...
+            </p>
+          )}
         </div>
       </div>
     </div>
@@ -494,23 +438,40 @@ const ResultsScreen = ({ onRestart }) => {
   );
 };
 
-// Composant Principal
+// Composant Principal - MODIFIÉ
 const Comparison = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [userAnswers, setUserAnswers] = useState([]);
+  const [errors, setErrors] = useState({});
   const [contactData, setContactData] = useState({
     firstName: '',
     lastName: '',
     phone: '',
     adresse: ''
   });
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
   const handleAnswerSelect = (answerIndex) => {
     setSelectedAnswer(answerIndex);
+
+    // Passer automatiquement à la question suivante après un délai
+    setTimeout(() => {
+      const currentQuestion = quizData[currentQuestionIndex];
+
+      // Enregistrer la réponse pour les questions à choix multiples
+      const newUserAnswers = [...userAnswers];
+      newUserAnswers[currentQuestionIndex] = {
+        questionIndex: currentQuestionIndex,
+        answerIndex: answerIndex,
+        answerText: currentQuestion.options[answerIndex].text
+      };
+
+      setUserAnswers(newUserAnswers);
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedAnswer(null);
+    }, 800); // Délai de 800ms pour permettre à l'utilisateur de voir la sélection
   };
 
   const handleFormChange = (field, value) => {
@@ -518,6 +479,13 @@ const Comparison = () => {
       ...prev,
       [field]: value
     }));
+    // Effacer l'erreur pour ce champ quand l'utilisateur tape
+    if (errors[field]) {
+      setErrors(prev => ({
+        ...prev,
+        [field]: ''
+      }));
+    }
   };
 
   const handleNext = () => {
@@ -553,8 +521,28 @@ const Comparison = () => {
     }
   };
 
-  // Fonction pour soumettre le formulaire directement
-  const handleSubmit = () => {
+  const validatePhone = (phone) => {
+    // Supprime les espaces pour simplifier
+    const cleaned = phone.replace(/\s+/g, "");
+
+    // Regex pour numéro suisse : commence par +41 ou 0 suivi de 9 chiffres
+    const swissRegex = /^(\+41|0)[1-9]\d{8}$/;
+
+    return swissRegex.test(cleaned);
+  };
+
+  // Fonction de confirmation directe - MODIFIÉE
+  const handleConfirm = async () => {
+    setLoading(true);
+    setErrors({});
+
+    // Validation du téléphone
+    if (!validatePhone(contactData.phone)) {
+      setErrors({ phone: "Le numéro doit être un numéro suisse valide." });
+      setLoading(false);
+      return;
+    }
+
     // Enregistrer d'abord les données du formulaire dans userAnswers
     const newUserAnswers = [...userAnswers];
     newUserAnswers[currentQuestionIndex] = {
@@ -562,13 +550,6 @@ const Comparison = () => {
       formData: contactData
     };
     setUserAnswers(newUserAnswers);
-
-    // Afficher la popup de confirmation
-    setShowConfirmation(true);
-  };
-
-  const handleConfirm = async () => {
-    setLoading(true);
 
     try {
       const response = await fetch("https://server-assurance.onrender.com/users/register", {
@@ -580,23 +561,27 @@ const Comparison = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Fermer la popup et afficher le message de succès
-        setShowConfirmation(false);
+        // Afficher le message de succès
         setIsCompleted(true);
       } else {
-
-        toast.error(data.message || "Une erreur est survenue")
+        const fieldErrors = {};
+        if (data.message) {
+          const msgs = data.message.split(",");
+          msgs.forEach((msg) => {
+            if (msg.toLowerCase().includes("nom de famille")) fieldErrors.lastName = msg.trim();
+            else if (msg.toLowerCase().includes("prénom")) fieldErrors.firstName = msg.trim();
+            else if (msg.toLowerCase().includes("téléphone")) fieldErrors.phone = msg.trim();
+            else if (msg.toLowerCase().includes("adresse")) fieldErrors.adresse = msg.trim();
+          });
+        }
+        setErrors(fieldErrors);
       }
     } catch (error) {
       console.error(error);
-      toast.error("Erreur réseau ou serveur");
+      setErrors({ general: "Erreur réseau ou serveur" });
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleCancel = () => {
-    setShowConfirmation(false);
   };
 
   const handleRestart = () => {
@@ -609,7 +594,7 @@ const Comparison = () => {
       phone: '',
       adresse: ''
     });
-    setShowConfirmation(false);
+    setErrors({});
     setIsCompleted(false);
   };
 
@@ -640,23 +625,14 @@ const Comparison = () => {
             contactData={contactData}
             onAnswerSelect={handleAnswerSelect}
             onFormChange={handleFormChange}
-            onNext={handleNext}
             onPrevious={handlePrevious}
-            onSubmit={handleSubmit}
+            onConfirm={handleConfirm}
             loading={loading}
+            errors={errors}
           />
         ) : (
           <ResultsScreen onRestart={handleRestart} />
         )}
-
-        <ConfirmationPopup
-          isOpen={showConfirmation}
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
-          userAnswers={userAnswers}
-          contactData={contactData}
-          loading={loading}
-        />
 
         {loading && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

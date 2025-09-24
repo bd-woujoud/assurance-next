@@ -5,17 +5,15 @@ import Comparison from '../component/Comparison';
 import { Star, Section, Menu, X } from "lucide-react";
 import Image from 'next/image';
 import img from '../comp.png'
+import Swal from 'sweetalert2';
 const Home = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(1);
-  const [answers, setAnswers] = useState({});
+
   const [currentSection, setCurrentSection] = useState('hero'); // hero, comparison, results
   const [isDark, setIsDark] = useState(false);
-  const [age, setAge] = useState(35);
-  const [selectedMethod, setSelectedMethod] = useState('');
-  const [phone, setPhone] = useState('');
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const totalQuestions = 4;
+
 
   // Dark mode detection
   useEffect(() => {
@@ -105,6 +103,25 @@ const Home = () => {
     }
     setIsMobileMenuOpen(false);
   };
+  const [count, setCount] = useState(25); // valeur de départ
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prev) => {
+        // génère un +1 ou -1 aléatoire
+        const change = Math.random() > 0.5 ? 1 : -1;
+        let newValue = prev + change;
+
+        // limite min et max (par ex. entre 20 et 50)
+        if (newValue < 20) newValue = 20;
+        if (newValue > 50) newValue = 50;
+
+        return newValue;
+      });
+    }, 3000); // change toutes les 3 secondes
+
+    return () => clearInterval(interval);
+  }, []);
 
   const reviews = [
     {
@@ -182,6 +199,91 @@ const Home = () => {
 
     return () => observer.disconnect();
   }, []);
+
+
+
+  //declarer les etats pour le formulaire
+  const [contactData, setContactData] = useState({
+    firstName: "",
+    lastName: "",
+    adresse: "",
+
+    phone: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const handleChangeForm = (e) => {
+    const { name, value } = e.target;
+    setContactData((prev) => ({ ...prev, [name]: value }));
+  };
+  const validatePhone = (phone) => {
+    // Supprime les espaces pour simplifier
+    const cleaned = phone.replace(/\s+/g, "");
+
+    // Regex pour numéro suisse : commence par +41 ou 0 suivi de 9 chiffres
+    const swissRegex = /^(\+41|0)[1-9]\d{8}$/;
+
+    return swissRegex.test(cleaned);
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    setErrors({});
+
+    if (!validatePhone(contactData.phone)) {
+      setErrors({ phone: "Le numéro doit être un numéro suisse valide." });
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("https://server-assurance.onrender.com/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsCompleted(true);
+
+        setContactData({ firstName: "", lastName: "", adresse: "", email: "", phone: "" });
+        Swal.fire({
+          icon: "success",
+          title: "Merci !",
+          text: "Votre demande a été envoyée. Notre conseiller va vous rappeler.",
+
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK",
+        });
+      } else {
+        const fieldErrors = {};
+        if (data.message) {
+          const msgs = data.message.split(",");
+          msgs.forEach((msg) => {
+            if (msg.toLowerCase().includes("nom de famille")) fieldErrors.lastName = msg.trim();
+            else if (msg.toLowerCase().includes("prénom")) fieldErrors.firstName = msg.trim();
+            else if (msg.toLowerCase().includes("téléphone")) fieldErrors.phone = msg.trim();
+            else if (msg.toLowerCase().includes("adresse")) fieldErrors.adresse = msg.trim();
+          });
+        }
+        setErrors(fieldErrors);
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Erreur",
+        text: "Erreur réseau ou serveur",
+        confirmButtonColor: "#d33",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (
@@ -359,7 +461,7 @@ const Home = () => {
 
       <div className="text-gray-900">
         {/* Navigation */}
-        <nav className="fixed top-0 w-full z-50 glass-card shadow-lg">
+        <nav className="fixed top-0 w-full z-50 glass-card shadow-lg bg-white ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center space-x-3 mt-6">
@@ -378,7 +480,7 @@ const Home = () => {
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.href)}
-                    className="text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-200"
+                    className="text-gray-700 hover:text-indigo-600 cursor-pointer font-medium transition-colors duration-200"
                   >
                     {item.name}
                   </button>
@@ -387,17 +489,23 @@ const Home = () => {
 
               <div className="hidden md:block text-center">
                 <p className='text-xs text-md-xl text-gray-500'>avis clients</p>
-                <div className="text-xs font-medium text-black">4.9/5 ⭐ 2,847 avis</div>
+                <div className="text-xs font-medium text-black">4.7/5 ⭐ 2,847 avis</div>
+              </div>
+              <div className="flex flex-row items-center gap-1">
+                <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
+                <p className="text-xs text-green-600">En ligne : {count}</p>
+
               </div>
 
               {/* Menu mobile */}
               <div className="md:hidden flex items-center space-x-4">
                 <div className="text-center">
-                  <div className="text-xs font-medium text-black">4.9/5 ⭐</div>
+                  <div className="text-xs font-medium text-black">4.7/5 ⭐</div>
                 </div>
+
                 <button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="text-gray-700 hover:text-indigo-600"
+                  className="text-gray-700 cursor-pointer hover:text-indigo-600"
                 >
                   {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -412,7 +520,7 @@ const Home = () => {
                     <button
                       key={item.name}
                       onClick={() => scrollToSection(item.href)}
-                      className="block w-full text-left px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 font-medium transition-colors duration-200"
+                      className="block w-full cursor-pointer text-left px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 font-medium transition-colors duration-200"
                     >
                       {item.name}
                     </button>
@@ -448,7 +556,7 @@ const Home = () => {
                 <div className="flex flex-wrap gap-6 text-sm md:text-base">
                   <button
                     onClick={handleStart}
-                    className="fixed right-6  top-2/3  mt-10 bg-indigo-600 text-white px-5 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 z-50"
+                    className="fixed right-6 cursor-pointer top-2/3  mt-10 bg-indigo-600 text-white px-5 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 z-50"
                   >
                     Comparer les assurances
                   </button>
@@ -856,7 +964,7 @@ const Home = () => {
                 </p>
                 <button
                   onClick={handleStart}
-                  className="bg-white text-indigo-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-colors duration-200 text-lg shadow-lg"
+                  className="bg-white cursor-pointer text-indigo-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-colors duration-200 text-lg shadow-lg"
                 >
                   Commencer ma comparaison gratuitement →
                 </button>
@@ -864,6 +972,117 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+
+
+        <section id="contactf" className="py-16 bg-gray-100">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-8 text-center">Contactez-nous</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Formulaire */}
+              <div>
+                <form className="bg-white p-6 rounded shadow-md space-y-4">
+                  {/* Row Nom + Prénom */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gray-700 mb-2">Nom</label>
+                      <input
+                        type="text"
+                        name="firstName"
+                        value={contactData.firstName}
+                        onChange={handleChangeForm}
+                        placeholder="Votre nom"
+                        className="w-full border border-gray-300 p-2 rounded"
+                      />
+                      {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
+
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 mb-2">Prénom</label>
+                      <input
+                        type="text"
+                        name="lastName"
+                        value={contactData.lastName}
+                        onChange={handleChangeForm}
+                        placeholder="Votre prénom"
+                        className="w-full border border-gray-300 p-2 rounded"
+                      />
+                      {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
+
+                    </div>
+                  </div>
+
+
+
+                  {/* Téléphone */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gray-700 mb-2">Téléphone</label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={contactData.phone}
+                        onChange={handleChangeForm}
+                        placeholder="Votre téléphone"
+                        className="w-full border border-gray-300 p-2 rounded"
+                      />
+                      {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-700 mb-2">Adresse</label>
+                      <input
+                        type="text"
+                        name="adresse"
+                        value={contactData.adresse}
+                        onChange={handleChangeForm}
+                        placeholder="Votre adresse"
+                        className="w-full border border-gray-300 p-2 rounded"
+                      />
+                      {errors.adresse && <p className="text-red-500 text-sm mt-1">{errors.adresse}</p>}
+                    </div>
+                  </div>
+                  {/* message */}
+                  <div className="mb-4">
+                    <label className="block text-gray-700 mb-2">Message</label>
+                    <textarea placeholder="Votre message" className="w-full border border-gray-300 p-2 rounded h-32" defaultValue={""} />
+                  </div>
+
+
+                  {/* Bouton */}
+                  <button
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={loading}
+                    className="bg-blue-500 text-white cursor-pointer px-4 py-2 rounded hover:bg-blue-600 transition"
+                  >
+                    {loading ? "Envoi..." : "Envoyer"}
+                  </button>
+
+
+                </form>
+
+              </div>
+
+              {/* Google Maps */}
+              <div className="h-80 md:h-auto">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2780.174616367804!2d6.136833276098012!3d46.19969547911582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c6502f49df79f%3A0x16d839b872b08a44!2sRue%20%C3%89tienne%20Dumont%2016%2C%202004%20Gen%C3%A8ve%2C%20Switzerland!5e0!3m2!1sen!2sus!4v1706075667890!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
 
         <footer id="contact" className="bg-gray-900 text-gray-100 py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -925,20 +1144,10 @@ const Home = () => {
                       <button className="relative w-12 h-12 rounded-full group">
                         <div className="floater w-full h-full absolute top-0 left-0 bg-blue-500 rounded-full duration-300 group-hover:-top-8 group-hover:shadow-2xl" />
                         <div className="icon relative z-10 w-full h-full flex items-center justify-center border-2 border-blue-500 rounded-full">
-                          <svg
-                            y="0"
-                            xmlns="http://www.w3.org/2000/svg"
-                            x="0"
-                            width="100"
-                            viewBox="0 0 100 100"
-                            preserveAspectRatio="xMidYMid meet"
-                            height="100"
-                            class="w-8 h-8 shrink-0 fill-white"
-                          >
-                            <path
-                              d="M92.86,0H7.12A7.17,7.17,0,0,0,0,7.21V92.79A7.17,7.17,0,0,0,7.12,100H92.86A7.19,7.19,0,0,0,100,92.79V7.21A7.19,7.19,0,0,0,92.86,0ZM30.22,85.71H15.4V38H30.25V85.71ZM22.81,31.47a8.59,8.59,0,1,1,8.6-8.59A8.6,8.6,0,0,1,22.81,31.47Zm63,54.24H71V62.5c0-5.54-.11-12.66-7.7-12.66s-8.91,6-8.91,12.26V85.71H39.53V38H53.75v6.52H54c2-3.75,6.83-7.7,14-7.7,15,0,17.79,9.89,17.79,22.74Z"
-                            ></path>
+                          <svg y={0} xmlns="http://www.w3.org/2000/svg" x={0} width={100} viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" height={100} className="w-8 h-8 shrink-0 fill-white">
+                            <path d="M92.86,0H7.12A7.17,7.17,0,0,0,0,7.21V92.79A7.17,7.17,0,0,0,7.12,100H92.86A7.19,7.19,0,0,0,100,92.79V7.21A7.19,7.19,0,0,0,92.86,0ZM30.22,85.71H15.4V38H30.25V85.71ZM22.81,31.47a8.59,8.59,0,1,1,8.6-8.59A8.6,8.6,0,0,1,22.81,31.47Zm63,54.24H71V62.5c0-5.54-.11-12.66-7.7-12.66s-8.91,6-8.91,12.26V85.71H39.53V38H53.75v6.52H54c2-3.75,6.83-7.7,14-7.7,15,0,17.79,9.89,17.79,22.74Z" />
                           </svg>
+
                         </div>
                       </button>
                     </div>
