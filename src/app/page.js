@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 // import './App.css'
 import Comparison from '../component/Comparison';
 import { Star, Section, Menu, X } from "lucide-react";
+import Image from 'next/image';
+import img from '../comp.png'
 const Home = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [answers, setAnswers] = useState({});
@@ -156,8 +158,36 @@ const Home = () => {
     }
   }, [currentIndex]);
 
+
+
+
+  const [showFloatBtn, setShowFloatBtn] = useState(true);
+
+  useEffect(() => {
+    const cta = document.querySelector("#cta");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.id === "cta") {
+            setShowFloatBtn(!entry.isIntersecting);
+            // bouton caché si la section "Rejoignez nos clients satisfaits !" est visible
+          }
+        });
+      },
+      { threshold: 0.2 } // visible si au moins 20% de la section est dans l’écran
+    );
+
+    if (cta) observer.observe(cta);
+
+    return () => observer.disconnect();
+  }, []);
+
+
   return (
     <div className={`min-h-screen ${isDark ? 'dark' : ''}`}>
+
+
       <style>{`
         @keyframes wiggle {
           0%, 100% { transform: rotate(-3deg); }
@@ -267,6 +297,25 @@ const Home = () => {
           transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
         }
 
+
+
+._7_i_XA {
+    display: block;
+    height: 60px;
+    pointer-events: none;
+    position: absolute;
+    width: 100px
+
+}
+
+._7_i_XA {
+    object-fit: fill
+ 
+}
+
+
+
+
         .img {
           width: 100%;
           height: 100%;
@@ -291,6 +340,21 @@ const Home = () => {
             height: 500px;
           }
         }
+
+
+/* From Uiverse.io by Pravins01 */ 
+/* From Uiverse.io by PriyanshuGupta28 */ 
+.card2 {
+  // width: 190px;
+  // height: 254px;
+  border-radius: 1rem;
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+
+
       `}</style>
 
       <div className="text-gray-900">
@@ -298,16 +362,14 @@ const Home = () => {
         <nav className="fixed top-0 w-full z-50 glass-card shadow-lg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-gradient-to-r from-red-400 to-teal-400 rounded-full flex items-center justify-center animate-heart-beat">
-                  <span className="text-2xl">🛡️</span>
-                </div>
-                <div>
-                  <span className="text-md-xl text-sm font-bold bg-gradient-to-r from-red-400 to-teal-400 bg-clip-text text-transparent">
-                    AssuranceMax.ch
-                  </span>
-                  <div className="text-xs text-gray-500">🇨🇭 Comparateur Suisse</div>
-                </div>
+              <div className="flex items-center space-x-3 mt-6">
+
+
+
+                <Image src={img} alt="Logo" width={100} height={60} className="cursor-pointer " onClick={() => scrollToSection('#hero')} />
+
+
+
               </div>
 
               {/* Navigation desktop */}
@@ -371,17 +433,26 @@ const Home = () => {
                   Comparateur d&apos;assurance{" "}
                   <span className="text-pink-300">maladie</span> Suisse
                 </h1>
-                <p className="text-md md:text-xl text-gray-100">
-                  Notre plateforme compare instantanément toutes les caisses-maladie suisses pour vous.
-                  <span className="font-bold"> Trouvez la meilleure offre en 3 clics !</span>
-                </p>
+
+
+
+                <div className="card2 w-full p-5">
+
+                  <p className="text-md md:text-xl text-gray-100">
+                    Notre plateforme compare instantanément toutes les caisses-maladie suisses pour vous.
+                    <span className="font-bold"> Trouvez la meilleure offre en 3 clics !</span>
+                  </p>
+                </div>
 
                 {/* Avantages */}
                 <div className="flex flex-wrap gap-6 text-sm md:text-base">
-                  <div className="flex items-center gap-2">
-                    <span className="text-pink-300 text-lg">📊</span>
-                    Comparaison gratuite
-                  </div>
+                  <button
+                    onClick={handleStart}
+                    className="fixed right-6  top-2/3  mt-10 bg-indigo-600 text-white px-5 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 z-50"
+                  >
+                    Comparer les assurances
+                  </button>
+
                   <div className="flex items-center gap-2">
                     <span className="text-green-300 text-lg">🏥</span>
                     Toutes les caisses-maladie
@@ -393,11 +464,11 @@ const Home = () => {
                 </div>
 
                 {/* Boutons */}
-                <div className="flex gap-4">
+                {/* <div className="flex gap-4">
                   <button onClick={handleStart} className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:bg-gray-100 transition">
                     Comparer les assurances →
                   </button>
-                </div>
+                </div> */}
 
                 {/* Stats de confiance */}
                 <div className="mt-6 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
@@ -776,7 +847,8 @@ const Home = () => {
             </div>
 
             {/* Call to action */}
-            <div className="text-center mt-16">
+            <div id="cta" className="text-center mt-16">
+
               <div className="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
                 <h3 className="text-2xl font-bold mb-4">Rejoignez nos clients satisfaits !</h3>
                 <p className="text-lg mb-6 opacity-90">
@@ -801,15 +873,97 @@ const Home = () => {
                 <h2 className="text-lg font-semibold mb-2">Contact</h2>
                 <p className="text-gray-400">Téléphone : <a href="tel:+41225552632" className="text-blue-400 hover:text-blue-600">+41225552632</a></p>
               </div>
+
+
+
+              <div className="relative">
+                <div className="absolute inset-0 bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl" />
+                <div className="relative flex items-end gap-x-2 p-2">
+                  {/* <div className="relative">
+                    <div style={{ clipPath: 'url(#squircleClip)' }} className="w-14 h-14 bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl flex items-center justify-center shadow-lg border border-gray-600/50 cursor-pointer transform transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl">
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                      </svg>
+                    </div>
+                  </div> */}
+
+
+                  <div className="flex items-center gap-4">
+
+                    <div className="social-button">
+                      <a
+                        href="https://wa.me/21698765432" // 👉 Mets ton numéro ici
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative w-12 h-12 rounded-full group block"
+                      >
+                        <div className="floater w-full h-full absolute top-0 left-0 bg-green-500 rounded-full duration-300 group-hover:-top-8 group-hover:shadow-2xl" />
+                        <div className="icon relative z-10 w-full h-full flex items-center justify-center border-2 border-green-500 rounded-full">
+                          <svg className="socialSvg whatsappSvg bg-green-500" fill="white" viewBox="0 0 22 22" height={22} width={22}>
+                            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"></path>
+                          </svg>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="social-button">
+                      <a href="https://www.facebook.com/share/1CHrUhMcZk/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+                        <button className="relative w-12 h-12 rounded-full group">
+                          <div className="floater w-full h-full absolute top-0 left-0 bg-blue-500 rounded-full duration-300 group-hover:-top-8 group-hover:shadow-2xl" />
+                          <div className="icon relative z-10 w-full h-full flex items-center justify-center border-2 border-blue-500 rounded-full">
+                            <svg fill="none" viewBox="0 0 13 22" height={22} width={13} xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M7.71289 22H4.1898C3.60134 22 3.12262 21.5213 3.12262 20.9328V12.9863H1.06717C0.478672 12.9863 0 12.5074 0 11.9191V8.514C0 7.9255 0.478672 7.44683 1.06717 7.44683H3.12262V5.74166C3.12262 4.05092 3.6535 2.6125 4.65773 1.58207C5.6665 0.546992 7.07627 0 8.7346 0L11.4214 0.00438281C12.0089 0.00537109 12.4868 0.484086 12.4868 1.07151V4.23311C12.4868 4.82157 12.0083 5.30028 11.4199 5.30028L9.61091 5.30093C9.05919 5.30093 8.91868 5.41153 8.88864 5.44543C8.83914 5.50172 8.78023 5.66062 8.78023 6.09954V7.4467H11.284C11.4725 7.4467 11.6551 7.49319 11.812 7.58076C12.1506 7.76995 12.3611 8.12762 12.3611 8.51417L12.3597 11.9193C12.3597 12.5074 11.881 12.9861 11.2926 12.9861H8.78019V20.9328C8.78023 21.5213 8.30139 22 7.71289 22ZM4.41233 20.7103H7.49031V12.4089C7.49031 12.016 7.81009 11.6964 8.20282 11.6964H11.07L11.0712 8.73662H8.20265C7.80991 8.73662 7.49031 8.41706 7.49031 8.02411V6.09959C7.49031 5.59573 7.54153 5.0227 7.92185 4.59198C8.38144 4.07133 9.10568 4.01126 9.61056 4.01126L11.1971 4.01057V1.29375L8.73357 1.28975C6.06848 1.28975 4.41238 2.99574 4.41238 5.7417V8.02407C4.41238 8.4168 4.09277 8.73658 3.7 8.73658H1.28975V11.6964H3.7C4.09277 11.6964 4.41238 12.016 4.41238 12.4089L4.41233 20.7103Z"
+                                className="group-hover:fill-[#171543] fill-white duration-300"
+                              />
+                            </svg>
+                          </div>
+                        </button>
+                      </a>
+                    </div>
+
+                    <div className="social-button">
+                      <button className="relative w-12 h-12 rounded-full group">
+                        <div className="floater w-full h-full absolute top-0 left-0 bg-blue-500 rounded-full duration-300 group-hover:-top-8 group-hover:shadow-2xl" />
+                        <div className="icon relative z-10 w-full h-full flex items-center justify-center border-2 border-blue-500 rounded-full">
+                          <svg
+                            y="0"
+                            xmlns="http://www.w3.org/2000/svg"
+                            x="0"
+                            width="100"
+                            viewBox="0 0 100 100"
+                            preserveAspectRatio="xMidYMid meet"
+                            height="100"
+                            class="w-8 h-8 shrink-0 fill-white"
+                          >
+                            <path
+                              d="M92.86,0H7.12A7.17,7.17,0,0,0,0,7.21V92.79A7.17,7.17,0,0,0,7.12,100H92.86A7.19,7.19,0,0,0,100,92.79V7.21A7.19,7.19,0,0,0,92.86,0ZM30.22,85.71H15.4V38H30.25V85.71ZM22.81,31.47a8.59,8.59,0,1,1,8.6-8.59A8.6,8.6,0,0,1,22.81,31.47Zm63,54.24H71V62.5c0-5.54-.11-12.66-7.7-12.66s-8.91,6-8.91,12.26V85.71H39.53V38H53.75v6.52H54c2-3.75,6.83-7.7,14-7.7,15,0,17.79,9.89,17.79,22.74Z"
+                            ></path>
+                          </svg>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+
+
+
+
+
+
+                </div>
+              </div>
+
+
             </div>
 
             {/* Bas de footer */}
             <div className="mt-8 border-t border-gray-700 pt-4 text-center text-gray-500 text-sm">
-              &copy; 2026 Tous droits réservés.
+              &copy; 2025 Tous droits réservés.
             </div>
           </div>
         </footer>
       </div>
+
+
     </div>
   )
 }
