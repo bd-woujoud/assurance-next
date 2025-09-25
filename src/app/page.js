@@ -192,7 +192,7 @@ const Home = () => {
           }
         });
       },
-      { threshold: 0.2 } // visible si au moins 20% de la section est dans l’écran
+      { threshold: 0.2 } // visible si au moins 20% de la section est dans l'écran
     );
 
     if (cta) observer.observe(cta);
@@ -533,7 +533,7 @@ const Home = () => {
 
         {/* Hero Section */}
         {currentSection === 'hero' && (
-          <section id="hero" className="relative hero-bg text-white py-20">
+          <section id="hero" className="relative hero-bg text-white py-20 mb-16">
             <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Col gauche - Texte */}
               <div className="space-y-6 mt-5 mt-md-0">
@@ -556,7 +556,7 @@ const Home = () => {
                 <div className="flex flex-wrap gap-6 text-sm md:text-base">
                   <button
                     onClick={handleStart}
-                    className="fixed right-6 cursor-pointer top-2/3  mt-10 bg-indigo-600 text-white px-5 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 z-50"
+                    className="fixed right-6 cursor-pointer bottom-1   bg-indigo-600 text-white px-5 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 z-50"
                   >
                     Comparer les assurances
                   </button>
@@ -670,49 +670,19 @@ const Home = () => {
         )}
 
         {showComparison && (
-          <div id="comparison" ref={comparisonRef} className='mb-5'>
+          <div id="comparison" ref={comparisonRef} className='mb-16'>
             <Comparison />
           </div>
         )}
 
-        <section id="results" className="min-h-screen py-20 flex items-center  bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
+        {/* Section des résultats */}
+        <section id="results" className="py-16 mb-16 bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-md-4xl text-2xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
               <p className="text-xl text-gray-600 dark:text-gray-400">Nous comparons les offres des assureurs les plus reconnus de Suisse pour vous garantir le meilleur choix</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8" id="results-container">
-              <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0s' }}>
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-3xl">🥇</span>
-                    <div>
-                      <h3 className="text-lg font-bold">CSS Assurance </h3>
-                      <div className="flex items-center">
-                        Meilleur rapport qualité-prix
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="text-center my-6">
-                  <div className="text-green-600 font-medium">Jusqu&apos;à 40%
-                    d&apos;économies par an</div>
-                </div>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center text-sm">
-                    <span className="mr-2">🌍</span>
-                    <span>Couverture mondiale</span>
-                  </li>
-                  <li className="flex items-center text-sm">
-                    <span className="mr-2">🌿</span>
-                    <span>Médecines alternatives</span>
-                  </li>
-                  <li className="flex items-center text-sm">
-                    <span className="mr-2">📱</span>
-                    <span>Téléconsultation 24h/7j</span>
-                  </li>
-                </ul>
-              </div>
               <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0.2s' }}>
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center space-x-2">
@@ -775,11 +745,13 @@ const Home = () => {
                   </li>
                 </ul>
               </div>
+              <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0s' }}> <div className="flex justify-between items-start mb-4"> <div className="flex items-center space-x-2"> <span className="text-3xl">🥇</span> <div> <h3 className="text-lg font-bold">CSS Assurance </h3> <div className="flex items-center"> Meilleur rapport qualité-prix </div> </div> </div> </div> <div className="text-center my-6"> <div className="text-green-600 font-medium">Jusqu&apos;à 40% d&apos;économies par an</div> </div> <ul className="space-y-3 mb-6"> <li className="flex items-center text-sm"> <span className="mr-2">🌍</span> <span>Couverture mondiale</span> </li> <li className="flex items-center text-sm"> <span className="mr-2">🌿</span> <span>Médecines alternatives</span> </li> <li className="flex items-center text-sm"> <span className="mr-2">📱</span> <span>Téléconsultation 24h/7j</span> </li> </ul> </div>
             </div>
           </div>
         </section>
 
-        <section id="reviews" className='bg-gradient-to-br from-gray-50 to-blue-50 py-20'>
+        {/* Section des avis */}
+        <section id="reviews" className='py-16 mb-16 bg-gradient-to-br from-gray-50 to-blue-50'>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Header de section */}
             <div className="text-center mb-16">
@@ -953,29 +925,29 @@ const Home = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Call to action */}
-            <div id="cta" className="text-center mt-16">
-
-              <div className="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
-                <h3 className="text-2xl font-bold mb-4">Rejoignez nos clients satisfaits !</h3>
-                <p className="text-lg mb-6 opacity-90">
-                  Plus de 50,000 familles suisses ont déjà économisé sur leurs assurances
-                </p>
-                <button
-                  onClick={handleStart}
-                  className="bg-white cursor-pointer text-indigo-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-colors duration-200 text-lg shadow-lg"
-                >
-                  Commencer ma comparaison gratuitement →
-                </button>
-              </div>
+        {/* Section CTA */}
+        <section className="py-16 mb-16">
+          <div id="cta" className="text-center">
+            <div className="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">Rejoignez nos clients satisfaits !</h3>
+              <p className="text-lg mb-6 opacity-90">
+                Plus de 50,000 familles suisses ont déjà économisé sur leurs assurances
+              </p>
+              <button
+                onClick={handleStart}
+                className="bg-white cursor-pointer text-indigo-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-colors duration-200 text-lg shadow-lg"
+              >
+                Commencer ma comparaison gratuitement →
+              </button>
             </div>
           </div>
         </section>
 
-
-
-        <section id="contactf" className="py-16 bg-gray-100">
+        {/* Section Contact */}
+        <section id="contactf" className="py-16 mb-16 bg-gray-100">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold mb-8 text-center">Contactez-nous</h2>
 
@@ -996,7 +968,6 @@ const Home = () => {
                         className="w-full border border-gray-300 p-2 rounded"
                       />
                       {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
-
                     </div>
 
                     <div>
@@ -1010,11 +981,8 @@ const Home = () => {
                         className="w-full border border-gray-300 p-2 rounded"
                       />
                       {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
-
                     </div>
                   </div>
-
-
 
                   {/* Téléphone */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1050,7 +1018,6 @@ const Home = () => {
                     <textarea placeholder="Votre message" className="w-full border border-gray-300 p-2 rounded h-32" defaultValue={""} />
                   </div>
 
-
                   {/* Bouton */}
                   <button
                     type="button"
@@ -1060,10 +1027,7 @@ const Home = () => {
                   >
                     {loading ? "Envoi..." : "Envoyer"}
                   </button>
-
-
                 </form>
-
               </div>
 
               {/* Google Maps */}
@@ -1082,8 +1046,7 @@ const Home = () => {
           </div>
         </section>
 
-
-
+        {/* Footer */}
         <footer id="contact" className="bg-gray-900 text-gray-100 py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-6 md:space-y-0">
@@ -1093,22 +1056,10 @@ const Home = () => {
                 <p className="text-gray-400">Téléphone : <a href="tel:+41225552632" className="text-blue-400 hover:text-blue-600">+41225552632</a></p>
               </div>
 
-
-
               <div className="relative">
                 <div className="absolute inset-0 bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl" />
                 <div className="relative flex items-end gap-x-2 p-2">
-                  {/* <div className="relative">
-                    <div style={{ clipPath: 'url(#squircleClip)' }} className="w-14 h-14 bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl flex items-center justify-center shadow-lg border border-gray-600/50 cursor-pointer transform transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl">
-                      <svg viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                      </svg>
-                    </div>
-                  </div> */}
-
-
                   <div className="flex items-center gap-4">
-
                     <div className="social-button">
                       <a
                         href="https://wa.me/21698765432" // 👉 Mets ton numéro ici
@@ -1147,21 +1098,12 @@ const Home = () => {
                           <svg y={0} xmlns="http://www.w3.org/2000/svg" x={0} width={100} viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" height={100} className="w-8 h-8 shrink-0 fill-white">
                             <path d="M92.86,0H7.12A7.17,7.17,0,0,0,0,7.21V92.79A7.17,7.17,0,0,0,7.12,100H92.86A7.19,7.19,0,0,0,100,92.79V7.21A7.19,7.19,0,0,0,92.86,0ZM30.22,85.71H15.4V38H30.25V85.71ZM22.81,31.47a8.59,8.59,0,1,1,8.6-8.59A8.6,8.6,0,0,1,22.81,31.47Zm63,54.24H71V62.5c0-5.54-.11-12.66-7.7-12.66s-8.91,6-8.91,12.26V85.71H39.53V38H53.75v6.52H54c2-3.75,6.83-7.7,14-7.7,15,0,17.79,9.89,17.79,22.74Z" />
                           </svg>
-
                         </div>
                       </button>
                     </div>
                   </div>
-
-
-
-
-
-
                 </div>
               </div>
-
-
             </div>
 
             {/* Bas de footer */}
@@ -1171,8 +1113,6 @@ const Home = () => {
           </div>
         </footer>
       </div>
-
-
     </div>
   )
 }
