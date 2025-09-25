@@ -472,31 +472,32 @@ const Home = () => {
 
 
 
-              </div>
 
-              {/* Navigation desktop */}
-              <div className="hidden md:flex items-center space-x-6">
-                {navItems.map((item) => (
-                  <button
-                    key={item.name}
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-gray-700 hover:text-indigo-600 cursor-pointer font-medium transition-colors duration-200"
-                  >
-                    {item.name}
-                  </button>
-                ))}
-              </div>
 
-              <div className="hidden md:block text-center">
-                <p className='text-xs text-md-xl text-gray-500'>avis clients</p>
-                <div className="text-xs font-medium text-black">4.7/5 ⭐ 2,847 avis</div>
+                {/* Navigation desktop */}
+                <div className="hidden md:flex items-center space-x-6">
+                  {navItems.map((item) => (
+                    <button
+                      key={item.name}
+                      onClick={() => scrollToSection(item.href)}
+                      className="text-gray-700 hover:text-indigo-600 cursor-pointer font-medium transition-colors duration-200"
+                    >
+                      {item.name}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="flex flex-row items-center gap-1">
-                <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
-                <p className="text-xs text-green-600">En ligne : {count}</p>
+              <div className='flex flex-row space-x-3'>
+                <div className="hidden md:block text-center">
+                  <p className='text-xs text-md-xl text-gray-500'>avis clients</p>
+                  <div className="text-xs font-medium text-black">4.7/5 ⭐ 2,847 avis</div>
+                </div>
+                <div className="flex flex-row items-center gap-1">
+                  <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
+                  <p className="text-xs text-green-600">En ligne : {count}</p>
 
+                </div>
               </div>
-
               {/* Menu mobile */}
               <div className="md:hidden flex items-center space-x-4">
                 <div className="text-center">
@@ -534,7 +535,7 @@ const Home = () => {
         {/* Hero Section */}
         {currentSection === 'hero' && (
           <section id="hero" className="relative hero-bg text-white py-20 mb-16">
-            <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 mt-10 md:mt-20">
               {/* Col gauche - Texte */}
               <div className="space-y-6 mt-5 mt-md-0">
                 <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
@@ -676,10 +677,10 @@ const Home = () => {
         )}
 
         {/* Section des résultats */}
-        <section id="results" className="py-16 mb-16 bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
+        <section id="results" className="py-16 mb-16  ">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-md-4xl text-2xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
+              <h2 className="text-md-4xl text-3xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
               <p className="text-xl text-gray-600 dark:text-gray-400">Nous comparons les offres des assureurs les plus reconnus de Suisse pour vous garantir le meilleur choix</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8" id="results-container">
@@ -755,7 +756,7 @@ const Home = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Header de section */}
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
                 Ce que disent nos clients
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
