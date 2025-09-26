@@ -784,7 +784,7 @@ const Home = () => {
                     <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <span className="text-2xl font-bold text-gray-900">4.9/5</span>
+                <span className="text-2xl font-bold text-gray-900">4.7/5</span>
                 <span className="text-gray-600">(2,847 avis)</span>
               </div>
             </div>
