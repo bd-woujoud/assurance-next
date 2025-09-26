@@ -2,6 +2,7 @@
 
 import { Manrope } from "next/font/google";
 import "./globals.css";
+import StatCounter from "./StatCounter";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
         className={manrope.className}
       >
         {children}
+        <StatCounter />
       </body>
     </html>
   );

@@ -1073,10 +1073,7 @@ const Home = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-6 md:space-y-0">
               {/* Section contact */}
-              <div>
-                <h2 className="text-lg font-semibold mb-2">Contact</h2>
-                <p className="text-gray-400">Téléphone : <a href="tel:0648897038" className="text-blue-400 hover:text-blue-600">0648897038</a></p>
-              </div>
+
 
               <div className="relative">
                 <div className="absolute inset-0 bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl" />
