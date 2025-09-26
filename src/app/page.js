@@ -684,7 +684,7 @@ const Home = () => {
               <p className="text-xl text-gray-600 dark:text-gray-400">Nous comparons les offres des assureurs les plus reconnus de Suisse pour vous garantir le meilleur choix</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8" id="results-container">
-              <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0.2s' }}>
+              <div className="bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0.2s' }}>
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center space-x-2">
                     <span className="text-3xl">🥈</span>
@@ -715,7 +715,7 @@ const Home = () => {
                   </li>
                 </ul>
               </div>
-              <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0.4s' }}>
+              <div className="bg-white  rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0.4s' }}>
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center space-x-2">
                     <span className="text-3xl">🥉</span>
@@ -746,7 +746,7 @@ const Home = () => {
                   </li>
                 </ul>
               </div>
-              <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0s' }}> <div className="flex justify-between items-start mb-4"> <div className="flex items-center space-x-2"> <span className="text-3xl">🥇</span> <div> <h3 className="text-lg font-bold">CSS Assurance </h3> <div className="flex items-center"> Meilleur rapport qualité-prix </div> </div> </div> </div> <div className="text-center my-6"> <div className="text-green-600 font-medium">Jusqu&apos;à 40% d&apos;économies par an</div> </div> <ul className="space-y-3 mb-6"> <li className="flex items-center text-sm"> <span className="mr-2">🌍</span> <span>Couverture mondiale</span> </li> <li className="flex items-center text-sm"> <span className="mr-2">🌿</span> <span>Médecines alternatives</span> </li> <li className="flex items-center text-sm"> <span className="mr-2">📱</span> <span>Téléconsultation 24h/7j</span> </li> </ul> </div>
+              <div className="bg-white  rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 animate-slide-up border-2 border-gray-100 hover:border-primary" style={{ animationDelay: '0s' }}> <div className="flex justify-between items-start mb-4"> <div className="flex items-center space-x-2"> <span className="text-3xl">🥇</span> <div> <h3 className="text-lg font-bold">CSS Assurance </h3> <div className="flex items-center"> Meilleur rapport qualité-prix </div> </div> </div> </div> <div className="text-center my-6"> <div className="text-green-600 font-medium">Jusqu&apos;à 40% d&apos;économies par an</div> </div> <ul className="space-y-3 mb-6"> <li className="flex items-center text-sm"> <span className="mr-2">🌍</span> <span>Couverture mondiale</span> </li> <li className="flex items-center text-sm"> <span className="mr-2">🌿</span> <span>Médecines alternatives</span> </li> <li className="flex items-center text-sm"> <span className="mr-2">📱</span> <span>Téléconsultation 24h/7j</span> </li> </ul> </div>
             </div>
           </div>
         </section>
