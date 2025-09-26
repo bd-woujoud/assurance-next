@@ -556,7 +556,11 @@ const Home = () => {
                 <div className="flex flex-wrap gap-6 text-sm md:text-base">
                   <button
                     onClick={handleStart}
-                    className=" flex flex-row fixed animate-pulse text-md  right-6 cursor-pointer top-2/3 mt-30 bg-blue-600  font-bold text-white px-5 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 z-50"
+                    className={`flex flex-row fixed animate-pulse text-md right-6 cursor-pointer bg-blue-600 font-bold text-white px-5 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 z-50`}
+                    style={{
+                      top: currentSection === 'hero' ? '80%' : '0%', // top différent selon section
+                      marginTop: currentSection === 'hero' ? '60px' : '0px'
+                    }}
                   >
                     <svg
                       viewBox="0 0 24 24"
@@ -565,7 +569,7 @@ const Home = () => {
                       className="animate-spin h-5 w-5 mr-3 text-white"
                     >
                       <circle
-                        stroke-width="4"
+                        strokeWidth="4"
                         stroke="currentColor"
                         r="10"
                         cy="12"
@@ -580,6 +584,7 @@ const Home = () => {
                     </svg>
                     Comparer les assurances
                   </button>
+
 
 
 
@@ -1070,7 +1075,7 @@ const Home = () => {
               {/* Section contact */}
               <div>
                 <h2 className="text-lg font-semibold mb-2">Contact</h2>
-                <p className="text-gray-400">Téléphone : <a href="tel:+41225552632" className="text-blue-400 hover:text-blue-600">+41225552632</a></p>
+                <p className="text-gray-400">Téléphone : <a href="tel:0648897038" className="text-blue-400 hover:text-blue-600">0648897038</a></p>
               </div>
 
               <div className="relative">
@@ -1079,7 +1084,7 @@ const Home = () => {
                   <div className="flex items-center gap-4">
                     <div className="social-button">
                       <a
-                        href="https://wa.me/21698765432" // 👉 Mets ton numéro ici
+                        href="https://wa.me/0033648897038"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="relative w-12 h-12 rounded-full group block"
