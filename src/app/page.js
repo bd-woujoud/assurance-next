@@ -103,25 +103,27 @@ const Home = () => {
     }
     setIsMobileMenuOpen(false);
   };
-  const [count, setCount] = useState(25); // valeur de départ
+  const [count, setCount] = useState(317); // valeur de départ
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCount((prev) => {
-        // génère un +1 ou -1 aléatoire
         const change = Math.random() > 0.5 ? 1 : -1;
         let newValue = prev + change;
 
-        // limite min et max (par ex. entre 20 et 50)
-        if (newValue < 20) newValue = 20;
-        if (newValue > 50) newValue = 50;
+        // borne min et max
+        if (newValue < 317) newValue = 317;
+        if (newValue > 350) newValue = 350;
 
         return newValue;
       });
-    }, 3000); // change toutes les 3 secondes
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
+
+
+
 
   const reviews = [
     {
