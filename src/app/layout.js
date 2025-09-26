@@ -20,7 +20,7 @@ export const metadata = {
   title: "Comparateur assurance maladie",
   description: "Comparateur d'assurance maladie en suisse",
   icons: {
-    icon: "/comp1.png"
+    icon: "/comp.png"
   },
   themeColor: "#ffffff"
 };
