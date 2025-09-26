@@ -331,10 +331,7 @@ const Home = () => {
           border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
-        .dark .glass-card {
-          background: rgba(45, 52, 54, 0.95);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    
         
         .emoji-float {
           animation: float 4s ease-in-out infinite;
@@ -461,7 +458,7 @@ const Home = () => {
 
       <div className="text-gray-900">
         {/* Navigation */}
-        <nav className="fixed top-0 w-full z-50 glass-card shadow-lg bg-white ">
+        <nav className="fixed top-0 w-full z-50 glass-card shadow-lg !bg-white ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center space-x-3 mt-6">
@@ -493,7 +490,7 @@ const Home = () => {
                   <div className="text-xs font-medium text-black">4.7/5 ⭐ 2,847 avis</div>
                 </div>
                 <div className="flex flex-row items-center gap-1">
-                  <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                   <p className="text-xs text-green-600">En ligne : {count}</p>
 
                 </div>
@@ -534,8 +531,8 @@ const Home = () => {
 
         {/* Hero Section */}
         {currentSection === 'hero' && (
-          <section id="hero" className="relative hero-bg text-white py-20 mb-16">
-            <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 mt-10 md:mt-20">
+          <section id="hero" className="relative hero-bg text-white py-20 mb-12 md:mb-16">
+            <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 mt-10 md:mt-20">
               {/* Col gauche - Texte */}
               <div className="space-y-6 mt-5 mt-md-0">
                 <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
@@ -548,7 +545,7 @@ const Home = () => {
                 <div className="card2 w-full p-5">
 
                   <p className="text-md md:text-xl text-gray-100">
-                    Notre plateforme compare instantanément toutes les caisses-maladie suisses pour vous.
+                    Notre plateforme compare instantanément toutes les caisses-maladie suisses pour vous. <br />
                     <span className="font-bold"> Trouvez la meilleure offre en 3 clics !</span>
                   </p>
                 </div>
@@ -557,10 +554,32 @@ const Home = () => {
                 <div className="flex flex-wrap gap-6 text-sm md:text-base">
                   <button
                     onClick={handleStart}
-                    className="fixed right-6 cursor-pointer bottom-1   bg-indigo-600 text-white px-5 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 z-50"
+                    className=" flex flex-row fixed animate-pulse text-md  right-6 cursor-pointer top-2/3 mt-30 bg-blue-600  font-bold text-white px-5 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 z-50"
                   >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="animate-spin h-5 w-5 mr-3 text-white"
+                    >
+                      <circle
+                        stroke-width="4"
+                        stroke="currentColor"
+                        r="10"
+                        cy="12"
+                        cx="12"
+                        className="opacity-25"
+                      ></circle>
+                      <path
+                        d="M4 12a8 8 0 018-8v8H4z"
+                        fill="currentColor"
+                        className="opacity-75"
+                      ></path>
+                    </svg>
                     Comparer les assurances
                   </button>
+
+
 
                   <div className="flex items-center gap-2">
                     <span className="text-green-300 text-lg">🏥</span>
@@ -572,12 +591,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                {/* Boutons */}
-                {/* <div className="flex gap-4">
-                  <button onClick={handleStart} className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:bg-gray-100 transition">
-                    Comparer les assurances →
-                  </button>
-                </div> */}
+
 
                 {/* Stats de confiance */}
                 <div className="mt-6 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
@@ -677,7 +691,7 @@ const Home = () => {
         )}
 
         {/* Section des résultats */}
-        <section id="results" className="py-16 mb-16  ">
+        <section id="results" className="py-16 mb-12 md:mb-16 ">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-md-4xl text-3xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
@@ -752,7 +766,7 @@ const Home = () => {
         </section>
 
         {/* Section des avis */}
-        <section id="reviews" className='py-16 mb-16 bg-gradient-to-br from-gray-50 to-blue-50'>
+        <section id="reviews" className='py-16 mb-12 md:mb-16 bg-gradient-to-br from-gray-50 to-blue-50'>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Header de section */}
             <div className="text-center mb-16">
@@ -930,7 +944,7 @@ const Home = () => {
         </section>
 
         {/* Section CTA */}
-        <section className="py-16 mb-16">
+        <section className="py-16 mb-12 md:mb-16">
           <div id="cta" className="text-center">
             <div className="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
               <h3 className="text-2xl font-bold mb-4">Rejoignez nos clients satisfaits !</h3>
@@ -948,7 +962,7 @@ const Home = () => {
         </section>
 
         {/* Section Contact */}
-        <section id="contactf" className="py-16 mb-16 bg-gray-100">
+        <section id="contactf" className="py-16mb-12 md:mb-16 bg-gray-100">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold mb-8 text-center">Contactez-nous</h2>
 
