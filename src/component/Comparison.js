@@ -206,7 +206,21 @@ const FormQuestion = ({
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 leading-relaxed text-center">
           {question.question}
         </h3>
-
+        {/* Éléments de confiance */}
+        <div className="grid grid-cols-3 gap-4 mt-8 mb-6">
+          <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+            <Lock className="mx-auto text-blue-500 mb-2" size={32} />
+            <div className="text-sm font-medium text-gray-700 dark:text-gray-300">100% sécurisé</div>
+          </div>
+          <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+            <Zap className="mx-auto text-yellow-500 mb-2" size={32} />
+            <div className="text-sm font-medium text-gray-700 dark:text-gray-300">Envoi instantané</div>
+          </div>
+          <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+            <Gift className="mx-auto text-green-500 mb-2" size={32} />
+            <div className="text-sm font-medium text-gray-700 dark:text-gray-300">Totalement gratuit</div>
+          </div>
+        </div>
         <div className="max-w-2xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="form-group">
@@ -278,21 +292,7 @@ const FormQuestion = ({
             </div>
           </div>
 
-          {/* Éléments de confiance */}
-          <div className="grid grid-cols-3 gap-4 mt-8 mb-6">
-            <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
-              <Lock className="mx-auto text-blue-500 mb-2" size={32} />
-              <div className="text-sm font-medium text-gray-700 dark:text-gray-300">100% sécurisé</div>
-            </div>
-            <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
-              <Zap className="mx-auto text-yellow-500 mb-2" size={32} />
-              <div className="text-sm font-medium text-gray-700 dark:text-gray-300">Envoi instantané</div>
-            </div>
-            <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
-              <Gift className="mx-auto text-green-500 mb-2" size={32} />
-              <div className="text-sm font-medium text-gray-700 dark:text-gray-300">Totalement gratuit</div>
-            </div>
-          </div>
+
         </div>
       </div>
 
@@ -610,10 +610,10 @@ const Comparison = () => {
                 .animate-fade-in { animation: fadeIn 0.5s ease-out; }
             `}</style>
 
-      <div className="absolute top-40 left-10 text-3xl" style={{ animationDelay: '0s' }}>💊</div>
-      <div className="absolute top-32 right-20 text-4xl" style={{ animationDelay: '1s' }}>🩺</div>
-      <div className="absolute bottom-20 left-20 text-4xl" style={{ animationDelay: '2s' }}>💰</div>
-      <div className="absolute top-1/2 right-10 text-5xl" style={{ animationDelay: '3s' }}>🎯</div>
+      <div className=" d-none md:d-block absolute top-40 left-10 text-3xl" style={{ animationDelay: '0s' }}>💊</div>
+      <div className=" absolute top-32 right-20 text-4xl" style={{ animationDelay: '1s' }}>🩺</div>
+      <div className="  d-none md:d-block  absolute bottom-20 left-20 text-4xl" style={{ animationDelay: '2s' }}>💰</div>
+      <div className="absolute  top:2/3 md:top-1/2 right-10 text-5xl" style={{ animationDelay: '3s' }}>🎯</div>
 
       <div className="w-full max-w-3xl relative z-10 mt-[100px]">
         {!isCompleted ? (

@@ -604,15 +604,15 @@ const Home = () => {
                 <div className="mt-6 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
                   <div className="flex flex-wrap justify-between items-center gap-4 text-center">
                     <div>
-                      <div className="text-2xl font-bold">15+</div>
+                      <div className=" text-xl md:text-2xl font-bold">15+</div>
                       <div className="text-sm opacity-80">Assureurs comparés</div>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold">50K+</div>
+                      <div className=" text-xl md:text-2xl font-bold">20K+</div>
                       <div className="text-sm opacity-80">Clients satisfaits</div>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold">2.1K CHF</div>
+                      <div className=" text-xl md:text-2xl font-bold">2.1K CHF</div>
                       <div className="text-sm opacity-80">Économie moyenne/an</div>
                     </div>
                   </div>
@@ -701,7 +701,7 @@ const Home = () => {
         <section id="results" className="py-16 mb-12 md:mb-16 ">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-md-4xl text-3xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
+              <h2 className=" text-2xl md:text-3xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
               <p className="text-xl text-gray-600 dark:text-gray-400">Nous comparons les offres des assureurs les plus reconnus de Suisse pour vous garantir le meilleur choix</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8" id="results-container">
@@ -777,7 +777,7 @@ const Home = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Header de section */}
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className=" text-2xl md:text-3xl font-bold text-gray-900 mb-4">
                 Ce que disent nos clients
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -971,7 +971,7 @@ const Home = () => {
         {/* Section Contact */}
         <section id="contactf" className="py-16mb-12 md:mb-16 bg-gray-100">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center">Contactez-nous</h2>
+            <h2 className=" text-2xl md:text-3xl pt-10  font-bold mb-8 text-center">Contactez-nous</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Formulaire */}
