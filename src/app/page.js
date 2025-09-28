@@ -533,7 +533,7 @@ const Home = () => {
 
         {/* Hero Section */}
         {currentSection === 'hero' && (
-          <section id="hero" className="relative hero-bg text-white py-20 mb-12 md:mb-16">
+          <section id="hero" className="relative hero-bg text-white py-20 ">
             <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 mt-10 md:mt-20">
               {/* Col gauche - Texte */}
               <div className="space-y-6 mt-5 mt-md-0">
@@ -698,7 +698,7 @@ const Home = () => {
         )}
 
         {/* Section des résultats */}
-        <section id="results" className="py-16 mb-12 md:mb-16 ">
+        <section id="results" className="py-16  ">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className=" text-2xl md:text-3xl font-bold mb-4">Les meilleurs assureurs suisses</h2>
@@ -773,7 +773,7 @@ const Home = () => {
         </section>
 
         {/* Section des avis */}
-        <section id="reviews" className='py-16 mb-12 md:mb-16 bg-gradient-to-br from-gray-50 to-blue-50'>
+        <section id="reviews" className='py-16 bg-gradient-to-br from-gray-50 to-blue-50'>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Header de section */}
             <div className="text-center mb-16">
@@ -951,7 +951,7 @@ const Home = () => {
         </section>
 
         {/* Section CTA */}
-        <section className="py-16 mb-12 md:mb-16">
+        <section className="py-16 ">
           <div id="cta" className="text-center">
             <div className="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
               <h3 className="text-2xl font-bold mb-4">Rejoignez nos clients satisfaits !</h3>
@@ -969,7 +969,7 @@ const Home = () => {
         </section>
 
         {/* Section Contact */}
-        <section id="contactf" className="py-16mb-12 md:mb-16 bg-gray-100">
+        <section id="contactf" className="py-16 bg-gray-100">
           <div className="container mx-auto px-4">
             <h2 className=" text-2xl md:text-3xl pt-10  font-bold mb-8 text-center">Contactez-nous</h2>
 

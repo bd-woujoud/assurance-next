@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   GraduationCap,
   Briefcase,
@@ -90,7 +90,8 @@ const quizData = [
   },
   // Question formulaire complet
   {
-    question: "Pour finaliser votre demande, merci de remplir vos coordonnées",
+    question: "Un conseiller en assurance expert vous contactera gratuitement pour expliquer vos résultats,identifier vos points faibles et vous proposer des solutions adaptées à votre profil.",
+
     iconColor: "text-green-600",
     type: "form",
     icon: UserPlus
@@ -266,7 +267,7 @@ const FormQuestion = ({
                 type="tel"
                 value={contactData.phone}
                 onChange={(e) => handleChange('phone', e.target.value)}
-                placeholder="76 123 45 67"
+                placeholder=" CH +41 23 451 67 89"
                 className="w-full px-4 py-3 border-2 border-gray-300  rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white  text-gray-900 "
                 required
                 disabled={loading}
@@ -323,7 +324,7 @@ const FormQuestion = ({
               'Veuillez remplir tous les champs'
             ) : (
               <>
-                Terminer
+                Être rappelé gratuitement
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={16} />
               </>
             )}
@@ -404,10 +405,15 @@ const QuestionScreen = ({
           {selectedAnswer === null ? (
             <p className="text-sm">Sélectionnez une réponse pour continuer</p>
           ) : (
-            <p className="text-sm flex items-center">
+            <div className="text-sm flex items-center">
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
               Passage à la question suivante...
-            </p>
+            </div>
+
+            // <p className="text-sm flex items-center">
+            //   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
+            //   Passage à la question suivante...
+            // </p>
           )}
         </div>
       </div>
@@ -417,8 +423,13 @@ const QuestionScreen = ({
 
 // Composant Results Screen
 const ResultsScreen = ({ onRestart }) => {
+  const resultRef = useRef(null);
+
+  useEffect(() => {
+    resultRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
   return (
-    <div className="text-center animate-fade-in">
+    <div ref={resultRef} className="text-center animate-fade-in">
       <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
         <Check className="text-green-600" size={48} />
       </div>
@@ -520,7 +531,13 @@ const Comparison = () => {
       }
     }
   };
-
+  const questionRef = React.useRef(null);
+  // Scroll vers la barre de question quand on change de question
+  useEffect(() => {
+    if (questionRef.current) {
+      questionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [currentQuestionIndex]);
   const validatePhone = (phone) => {
     // Supprime les espaces pour simplifier
     const cleaned = phone.replace(/\s+/g, "");
