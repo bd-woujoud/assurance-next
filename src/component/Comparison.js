@@ -109,14 +109,14 @@ const ProgressBar = ({ current, total }) => {
             <HelpCircle className="text-white" size={16} />
           </div>
           <div>
-            <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Question</div>
-            <div className="font-semibold text-gray-900 dark:text-white">
+            <div className="text-sm font-medium text-gray-500 ">Question</div>
+            <div className="font-semibold text-gray-900 ">
               {current} sur {total}
             </div>
           </div>
         </div>
       </div>
-      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+      <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
         <div
           className="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-500 ease-out"
           style={{ width: `${progress}%` }}
@@ -135,14 +135,14 @@ const AnswerOption = ({ option, index, isSelected, onSelect }) => {
       onClick={() => onSelect(index)}
       className={`answer-option group relative overflow-hidden rounded-xl border cursor-pointer transition-all duration-300 transform hover:scale-102 hover:shadow-lg p-5 ${isSelected
         ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white border-transparent'
-        : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700'
+        : 'border-gray-200  bg-white  hover:bg-gray-50 '
         }`}
     >
       <div className="flex items-center space-x-4">
         <div className="flex-shrink-0">
           <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${isSelected
             ? 'bg-white text-blue-600'
-            : 'bg-gray-100 dark:bg-gray-600 group-hover:bg-blue-600 group-hover:text-white'
+            : 'bg-gray-100  group-hover:bg-blue-600 group-hover:text-white'
             }`}>
             <IconComponent size={20} />
           </div>
@@ -155,7 +155,7 @@ const AnswerOption = ({ option, index, isSelected, onSelect }) => {
         <div className="flex-shrink-0">
           <div className={`w-5 h-5 border-2 rounded-full flex items-center justify-center transition-all duration-300 ${isSelected
             ? 'border-white'
-            : 'border-gray-300 dark:border-gray-600 group-hover:border-blue-600'
+            : 'border-gray-300  group-hover:border-blue-600'
             }`}>
             {isSelected && <div className="w-2 h-2 bg-white rounded-full"></div>}
           </div>
@@ -199,32 +199,32 @@ const FormQuestion = ({
 
       <div className="mb-8">
         <div className="flex items-center justify-center mb-6">
-          <div className="w-16 h-16 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-full flex items-center justify-center shadow-lg mb-4">
+          <div className="w-16 h-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full flex items-center justify-center shadow-lg mb-4">
             <IconComponent className={`${question.iconColor}`} size={32} />
           </div>
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 leading-relaxed text-center">
+        <h3 className="text-2xl font-bold text-gray-900  mb-6 leading-relaxed text-center">
           {question.question}
         </h3>
         {/* Éléments de confiance */}
         <div className="grid grid-cols-3 gap-4 mt-8 mb-6">
-          <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+          <div className="text-center p-4 bg-gray-50  rounded-xl">
             <Lock className="mx-auto text-blue-500 mb-2" size={32} />
-            <div className="text-sm font-medium text-gray-700 dark:text-gray-300">100% sécurisé</div>
+            <div className="text-sm font-medium text-gray-700 ">100% sécurisé</div>
           </div>
-          <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+          <div className="text-center p-4 bg-gray-50  rounded-xl">
             <Zap className="mx-auto text-yellow-500 mb-2" size={32} />
-            <div className="text-sm font-medium text-gray-700 dark:text-gray-300">Envoi instantané</div>
+            <div className="text-sm font-medium text-gray-700 ">Envoi instantané</div>
           </div>
-          <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+          <div className="text-center p-4 bg-gray-50  rounded-xl">
             <Gift className="mx-auto text-green-500 mb-2" size={32} />
-            <div className="text-sm font-medium text-gray-700 dark:text-gray-300">Totalement gratuit</div>
+            <div className="text-sm font-medium text-gray-700 ">Totalement gratuit</div>
           </div>
         </div>
         <div className="max-w-2xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="form-group">
-              <label className="block text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
+              <label className="block text-lg font-semibold mb-3 text-gray-700 ">
                 <User className="inline mr-2 text-blue-500" size={20} />
                 Prénom *
               </label>
@@ -233,7 +233,7 @@ const FormQuestion = ({
                 value={contactData.firstName}
                 onChange={(e) => handleChange('firstName', e.target.value)}
                 placeholder="Votre prénom"
-                className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                className="w-full px-4 py-3 border-2 border-gray-300  rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white  text-gray-900 "
                 required
                 disabled={loading}
               />
@@ -241,7 +241,7 @@ const FormQuestion = ({
             </div>
 
             <div className="form-group">
-              <label className="block text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
+              <label className="block text-lg font-semibold mb-3 text-gray-700 ">
                 <CreditCard className="inline mr-2 text-purple-500" size={20} />
                 Nom *
               </label>
@@ -250,7 +250,7 @@ const FormQuestion = ({
                 value={contactData.lastName}
                 onChange={(e) => handleChange('lastName', e.target.value)}
                 placeholder="Votre nom de famille"
-                className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                className="w-full px-4 py-3 border-2 border-gray-300  rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white  text-gray-900 "
                 required
                 disabled={loading}
               />
@@ -258,7 +258,7 @@ const FormQuestion = ({
             </div>
 
             <div className="form-group">
-              <label className="block text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
+              <label className="block text-lg font-semibold mb-3 text-gray-700 ">
                 <Phone className="inline mr-2 text-green-500" size={20} />
                 Téléphone *
               </label>
@@ -267,7 +267,7 @@ const FormQuestion = ({
                 value={contactData.phone}
                 onChange={(e) => handleChange('phone', e.target.value)}
                 placeholder="76 123 45 67"
-                className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                className="w-full px-4 py-3 border-2 border-gray-300  rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white  text-gray-900 "
                 required
                 disabled={loading}
               />
@@ -275,7 +275,7 @@ const FormQuestion = ({
             </div>
 
             <div className="form-group">
-              <label className="block text-lg font-semibold mb-3 text-gray-700 dark:text-gray-300">
+              <label className="block text-lg font-semibold mb-3 text-gray-700 ">
                 <MapPin className="inline mr-2 text-red-500" size={20} />
                 Adresse *
               </label>
@@ -284,7 +284,7 @@ const FormQuestion = ({
                 value={contactData.adresse}
                 onChange={(e) => handleChange('adresse', e.target.value)}
                 placeholder="Votre adresse complète"
-                className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                className="w-full px-4 py-3 border-2 border-gray-300 d rounded-xl text-lg focus:border-blue-500 focus:outline-none transition-all duration-300 bg-white  text-gray-900 "
                 required
                 disabled={loading}
               />
@@ -301,7 +301,7 @@ const FormQuestion = ({
           <button
             onClick={onPrevious}
             disabled={loading}
-            className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 font-medium text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+            className="px-6 py-3 border border-gray-300  text-gray-700  rounded-xl hover:bg-gray-50  transition-all duration-300 font-medium text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           >
             <ArrowLeft className="mr-2" size={16} />
             Précédent
@@ -372,7 +372,7 @@ const QuestionScreen = ({
       />
 
       <div className="mb-8">
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 leading-relaxed text-center">
+        <h3 className="text-2xl font-bold text-gray-900  mb-6 leading-relaxed text-center">
           {question.question}
         </h3>
         <div className="space-y-4 py-0">
@@ -392,7 +392,7 @@ const QuestionScreen = ({
         {currentIndex > 0 ? (
           <button
             onClick={onPrevious}
-            className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 font-medium text-base flex items-center"
+            className="px-6 py-3 border border-gray-300  text-gray-700  rounded-xl hover:bg-gray-50 transition-all duration-300 font-medium text-base flex items-center"
           >
             <ArrowLeft className="mr-2" size={16} />
             Précédent
@@ -400,7 +400,7 @@ const QuestionScreen = ({
         ) : <div></div>}
 
         {/* Message informatif au lieu du bouton */}
-        <div className="text-center text-gray-500 dark:text-gray-400">
+        <div className="text-center text-gray-500">
           {selectedAnswer === null ? (
             <p className="text-sm">Sélectionnez une réponse pour continuer</p>
           ) : (
@@ -419,13 +419,13 @@ const QuestionScreen = ({
 const ResultsScreen = ({ onRestart }) => {
   return (
     <div className="text-center animate-fade-in">
-      <div className="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
+      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
         <Check className="text-green-600" size={48} />
       </div>
-      <h2 className=" text-xl text-3xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 className=" text-xl text-3xl font-bold text-gray-900 mb-4">
         Demande enregistrée avec succès !
       </h2>
-      <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+      <p className="text-xl text-gray-600  mb-8">
         Votre demande va être traitée. Un conseiller vous contactera prochainement pour vous proposer les meilleures offres d&apos;assurance adaptées à votre profil.
       </p>
       <button
@@ -610,9 +610,9 @@ const Comparison = () => {
                 .animate-fade-in { animation: fadeIn 0.5s ease-out; }
             `}</style>
 
-      <div className=" d-none md:d-block absolute top-40 left-10 text-3xl" style={{ animationDelay: '0s' }}>💊</div>
+      <div className=" hidden md:block absolute top-40 left-10 text-3xl" style={{ animationDelay: '0s' }}>💊</div>
       <div className=" absolute top-32 right-20 text-4xl" style={{ animationDelay: '1s' }}>🩺</div>
-      <div className="  d-none md:d-block  absolute bottom-20 left-20 text-4xl" style={{ animationDelay: '2s' }}>💰</div>
+      <div className=" hidden md:block   absolute bottom-20 left-20 text-4xl" style={{ animationDelay: '2s' }}>💰</div>
       <div className="absolute  top:2/3 md:top-1/2 right-10 text-5xl" style={{ animationDelay: '3s' }}>🎯</div>
 
       <div className="w-full max-w-3xl relative z-10 mt-[100px]">
@@ -636,9 +636,9 @@ const Comparison = () => {
 
         {loading && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center">
+            <div className="bg-white  rounded-2xl p-8 text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-gray-600 dark:text-gray-300">Envoi en cours...</p>
+              <p className="text-gray-600">Envoi en cours...</p>
             </div>
           </div>
         )}
