@@ -295,6 +295,7 @@ const FormQuestion = ({
 
 
         </div>
+        <p>Un conseiller en assurance expert vous contactera gratuitement pour expliquer vos résultats, identifier vos points faibles et vous proposer des solutions adaptées à votre profil.</p>
       </div>
 
       <div className="flex justify-between items-center pt-6">
@@ -325,7 +326,7 @@ const FormQuestion = ({
             ) : (
               <>
                 Être rappelé gratuitement
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={16} />
+                <ArrowRight className="ml-2 text-sm group-hover:translate-x-1 transition-transform duration-300" size={16} />
               </>
             )}
           </span>
