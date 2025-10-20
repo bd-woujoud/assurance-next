@@ -30,7 +30,7 @@ import {
   CreditCard
 } from 'lucide-react';
 
-// Données du quiz avec formulaire complet
+
 const quizData = [
   {
     question: "Quel âge avez-vous ?",
