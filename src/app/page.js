@@ -599,8 +599,6 @@ const Home = () => {
                 </div>
 
 
-
-                {/* Stats de confiance */}
                 <div className="mt-6 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
                   <div className="flex flex-wrap justify-between items-center gap-4 text-center">
                     <div>
@@ -630,7 +628,6 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Col droite - Carrousel */}
               <div className="flex justify-center relative">
                 <div className="wrapper">
                   <div className="inner" style={{ "--quantity": 10 }}>
