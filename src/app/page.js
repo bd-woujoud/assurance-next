@@ -235,7 +235,7 @@ const Home = () => {
     setErrors({});
 
     if (!validatePhone(contactData.phone)) {
-      setErrors({ phone: "Le numéro doit être un numéro suisse valide." });
+      setErrors({ phone: "Le numéro doit être un numéro suisse valide, commence par +41 ou 0 suivi de 9 chiffres" });
       setLoading(false);
       return;
     }
