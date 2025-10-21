@@ -694,6 +694,22 @@ const Home = () => {
           </div>
         )}
 
+        <section className="py-16 ">
+          <div id="cta" className="text-center">
+            <div className="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">Rejoignez nos clients satisfaits !</h3>
+              <p className="text-lg mb-6 opacity-90">
+                Plus de 5000 familles suisses ont déjà économisé sur leurs assurances
+              </p>
+              <button
+                onClick={handleStart}
+                className="bg-white cursor-pointer text-indigo-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-colors duration-200 text-lg shadow-lg"
+              >
+                Commencer ma comparaison gratuitement →
+              </button>
+            </div>
+          </div>
+        </section>
         {/* Section des résultats */}
         <section id="results" className="py-16  ">
           <div className="max-w-6xl mx-auto px-4">
