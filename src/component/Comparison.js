@@ -90,7 +90,7 @@ const quizData = [
   },
   // Question formulaire complet
   {
-    // question: "Un conseiller en assurance expert vous contactera gratuitement pour expliquer vos résultats,identifier vos points faibles et vous proposer des solutions adaptées à votre profil.",
+    question: " Passons à la 2ᵉ phase de notre processus",
 
     iconColor: "text-green-600",
     type: "form",
@@ -295,7 +295,7 @@ const FormQuestion = ({
 
 
         </div>
-        <p>Un conseiller en assurance expert vous contactera gratuitement pour expliquer vos résultats, identifier vos points faibles et vous proposer des solutions adaptées à votre profil.</p>
+        <p className='mt-3'> ⚠️ Un expert vous contactera gratuitement pour vérifier votre protection avant qu’un imprévu ne vous coûte cher.</p>
       </div>
 
       <div className="flex justify-between items-center pt-6">
