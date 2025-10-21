@@ -90,7 +90,7 @@ const quizData = [
   },
   // Question formulaire complet
   {
-    question: "Un conseiller en assurance expert vous contactera gratuitement pour expliquer vos résultats,identifier vos points faibles et vous proposer des solutions adaptées à votre profil.",
+    // question: "Un conseiller en assurance expert vous contactera gratuitement pour expliquer vos résultats,identifier vos points faibles et vous proposer des solutions adaptées à votre profil.",
 
     iconColor: "text-green-600",
     type: "form",
